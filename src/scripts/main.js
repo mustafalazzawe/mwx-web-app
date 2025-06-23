@@ -243,10 +243,6 @@ export class ThreeScene {
     this.controls.animateToTarget(cameraPos, targetPos, duration);
   };
 
-  orbitAroundTarget = (angle, duration = 2000) => {
-    this.controls.orbitTo(angle, null, duration);
-  };
-
   // Preset management
   saveCurrentView = (name) => {
     this.controls.savePreset(name);

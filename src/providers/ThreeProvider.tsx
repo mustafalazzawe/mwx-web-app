@@ -121,16 +121,6 @@ const ThreeProvider: FC<PropsWithChildren> = ({ children }) => {
     [isInitialized]
   );
 
-  const orbitCamera = useCallback(
-    (angle: number, duration = 2000) => {
-      if (threeSceneRef.current && isInitialized) {
-        threeSceneRef.current.orbitAroundTarget(angle, duration);
-        console.log(`Three Provider: Orbiting camera to angle ${angle}`);
-      }
-    },
-    [isInitialized]
-  );
-
   const stopCameraAnimation = useCallback(() => {
     if (threeSceneRef.current && isInitialized) {
       threeSceneRef.current.stopCameraAnimation();
@@ -191,7 +181,6 @@ const ThreeProvider: FC<PropsWithChildren> = ({ children }) => {
 
     // Camera controls
     moveCameraTo,
-    orbitCamera,
     stopCameraAnimation,
 
     // View presets

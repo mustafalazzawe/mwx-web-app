@@ -21,7 +21,6 @@ export declare class ThreeScene {
 
   // Movement
   moveCameraTo: (x: number, y: number, z: number, duration?: number) => void;
-  orbitAroundTarget: (angle: number, duration?: number) => void;
 
   // Animation
   stopCameraAnimation: () => void;

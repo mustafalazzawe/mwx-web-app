@@ -31,8 +31,6 @@ export interface IThreeState {
 
   // Camera controls
   moveCameraTo: (x: number, y: number, z: number, duration?: number) => void;
-  orbitCamera: (angle: number, duration?: number) => void;
-
   stopCameraAnimation: () => void;
 
   // View presets

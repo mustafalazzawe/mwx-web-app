@@ -140,6 +140,7 @@ class EnhancedControls {
     console.log(`Controls: Preset '${name}' saved`);
   }
 
+  // USE: Load preset with animation
   loadPreset(name, duration = 1000, easingFunction = null) {
     const preset = this.presets.get(name);
     if (preset) {
@@ -155,7 +156,67 @@ class EnhancedControls {
     }
   }
 
-  // Convenient methods for common animations
+  // USE: Instantly load preset without animation
+  loadPresetInstant(name) {
+    const preset = this.presets.get(name);
+    if (preset) {
+      this.moveTo(preset.position, preset.target);
+      console.log(`Controls: Instantly loaded preset '${name}'`);
+    } else {
+      console.warn(`Controls: Preset '${name}' not found`);
+    }
+  }
+
+  // Movement methods without animations
+
+  // USE: Move instantly to target position
+  moveTo(targetPosition, targetTarget = null) {
+    // Stop any existing animation
+    this.stopAnimation();
+
+    // Set camera position immediately
+    this.camera.position.copy(targetPosition);
+
+    // Set controls target if provided
+    if (targetTarget) {
+      this.controls.target.copy(targetTarget);
+    }
+
+    // Update controls to reflect new position
+    this.controls.update();
+  }
+
+  // USE: Instantly focus on an object
+  moveToObject(object, distance = 10) {
+    // Calculate position behind the object
+    const box = new THREE.Box3().setFromObject(object);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+
+    // Position camera to view the object
+    const direction = new THREE.Vector3(1, 0.5, 1).normalize();
+    const cameraPosition = center
+      .clone()
+      .add(direction.multiplyScalar(distance || maxDim * 2));
+
+    this.moveTo(cameraPosition, center);
+  }
+
+  // USE: Instantly focus on given position
+  moveToPosition(position, distance = 5, offset = { x: 1, y: 0.5, z: 1 }) {
+    const targetPos = new THREE.Vector3(position.x, position.y, position.z);
+    const offsetVec = new THREE.Vector3(
+      offset.x,
+      offset.y,
+      offset.z
+    ).normalize();
+    const cameraPos = targetPos.clone().add(offsetVec.multiplyScalar(distance));
+
+    this.moveTo(cameraPos, targetPos);
+  }
+
+  // Movement methods with animations
 
   // Smooth animation to target position
   // USE: Basic smooth movement
@@ -231,35 +292,6 @@ class EnhancedControls {
     const cameraPos = targetPos.clone().add(offsetVec.multiplyScalar(distance));
 
     this.animateToTarget(cameraPos, targetPos, duration);
-  }
-
-  // USE: Orbit around current target
-  orbitTo(angle, elevation = null, duration = 1000) {
-    const currentTarget = this.controls.target.clone();
-    const currentDistance = this.camera.position.distanceTo(currentTarget);
-
-    // Calculate new position
-    const phi =
-      elevation !== null
-        ? elevation
-        : Math.acos(
-            Math.max(
-              -1,
-              Math.min(
-                1,
-                (this.camera.position.y - currentTarget.y) / currentDistance
-              )
-            )
-          );
-    const theta = angle;
-
-    const newPosition = new THREE.Vector3(
-      currentTarget.x + currentDistance * Math.sin(phi) * Math.cos(theta),
-      currentTarget.y + currentDistance * Math.cos(phi),
-      currentTarget.z + currentDistance * Math.sin(phi) * Math.sin(theta)
-    );
-
-    this.animateToTarget(newPosition, currentTarget, duration);
   }
 
   // State management
