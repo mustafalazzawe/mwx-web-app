@@ -23,34 +23,39 @@ export class ThreeScene {
     this.isInitialized = false;
     this.schoolModel = null;
 
+
     this.camera = createCamera();
     this.scene = createScene();
     this.renderer = createRenderer();
 
-    this.loop = new Loop(this.camera, this.scene, this.renderer);
-
     // Append renderer to the provided container (canvas)
     container.appendChild(this.renderer.domElement);
+    
+    // Initialize game loop
+    this.loop = new Loop(this.camera, this.scene, this.renderer);
 
+    // Initialize controls
     this.controls = new EnhancedControls(this.camera, this.renderer.domElement);
-
-    // Initialize ModelLoader
-    this.setupModelLoader();
 
     // Set up control callbacks
     this.setupControlCallbacks();
+    
+    // Add controls to game loop
+    this.loop.updateables.push(this.controls.controls);
+    
+    // Initialize model loader
+    this.modelLoader = new ModelLoader(this.renderer);
 
+    // Create scene lighting
     const { ambientLight, directionalLight } = createLights();
 
-    // Add items to game loop
-    this.loop.updateables.push(this.controls.controls);
-
-    // Add items to scene
+    // Add lights to scene
     this.scene.add(ambientLight, directionalLight, directionalLight.target);
 
     // Ensure shadow map is updated after adding components to scene (esp. lights)
     this.renderer.shadowMap.needsUpdate = true;
 
+    // Initialize scene resizer
     const resizer = new Resizer(container, this.camera, this.renderer);
 
     // Render on demand if animation loop is not active
@@ -63,33 +68,6 @@ export class ThreeScene {
         this.render();
       };
     }
-
-    this.controls.savePreset("initial");
-  }
-
-  setupModelLoader() {
-    this.modelLoader = new ModelLoader(this.renderer, {
-      enableShadows: true,
-      autoCenter: false,
-      autoScale: false,
-      defaultScale: 1,
-    });
-
-    // Set up model loader callbacks
-    this.modelLoader
-      .setProgressCallback((progress, percentage, path, name) => {
-        console.log(`Loading ${name}: ${percentage.toFixed(1)}%`);
-        // You can emit progress events here for React UI updates
-        this.emitLoadingProgress?.(name, percentage);
-      })
-      .setLoadCallback((modelData, path) => {
-        console.log("Model loaded successfully:", modelData.metadata);
-        this.emitModelLoaded?.(modelData);
-      })
-      .setErrorCallback((error, path) => {
-        console.error("Failed to load model:", path, error);
-        this.emitModelError?.(path, error);
-      });
   }
 
   // Set up callback functions
@@ -97,15 +75,6 @@ export class ThreeScene {
     // Animation callbacks
     this.controls.onAnimationStart = () => {
       console.log("ThreeScene: Camera animation started");
-    };
-
-    this.controls.onAnimationComplete = () => {
-      console.log("ThreeScene: Camera animation completed");
-
-      // Force render if loop is not active
-      if (!this.loop.isLoopActive) {
-        this.render();
-      }
     };
 
     this.controls.onAnimationUpdate = (progress) => {
@@ -116,29 +85,15 @@ export class ThreeScene {
         this.render();
       }
     };
-  }
 
-  setupModelLoaderCallbacks() {
-    this.modelLoader
-      .setProgressCallback((progress, percentage, path, name) => {
-        console.log(`Loading ${name}: ${percentage.toFixed(1)}%`);
-        // Update UI progress bar here
-        this.updateLoadingProgress(name, percentage);
-      })
-      .setLoadCallback((modelData, path) => {
-        console.log("Model loaded:", modelData.metadata);
-        // Handle successful load
-        this.onModelLoaded(modelData);
-      })
-      .setErrorCallback((error, path) => {
-        console.error("Failed to load model:", path, error);
-        // Handle error
-        this.onModelLoadError(path, error);
-      })
-      .setModelProcessedCallback((modelData, options) => {
-        // Model is fully processed and ready to use
-        this.configureModelAnimations(modelData);
-      });
+    this.controls.onAnimationComplete = () => {
+      console.log("ThreeScene: Camera animation completed");
+
+      // Force render if loop is not active
+      if (!this.loop.isLoopActive) {
+        this.render();
+      }
+    };
   }
 
   async init() {
@@ -195,10 +150,24 @@ export class ThreeScene {
           addToScene: this.scene,
           position: new THREE.Vector3(0, 0, 0),
           enableShadows: true,
-          // Optional: Enable these if you want the model auto-sized
-          // autoCenter: true,
-          // autoScale: true,
-          // targetSize: 20
+          onProgress: (progress, percentage, path) => {
+            console.log(`Loading ${path}: ${percentage.toFixed(1)}%`);
+
+            // Emit progress event for React UI updates
+            this.emitLoadingProgress?.(path, percentage);
+          },
+          onLoad: (modelData, path) => {
+            console.log("Model loaded successfully:", modelData.metadata);
+
+            // Emit loaded event for React UI updates
+            this.emitModelLoaded?.(modelData);
+          },
+          onError: (error, path) => {
+            console.error("Failed to load model:", path, error);
+
+            // Emit error event for React UI updates
+            this.emitModelError?.(path, error);
+          },
         }
       );
 
@@ -207,29 +176,6 @@ export class ThreeScene {
     } catch (error) {
       console.error("Failed to load school model:", error);
     }
-  }
-
-  // Utility methods
-  updateLoadingProgress(modelName, percentage) {
-    // Update your UI progress bar
-    const progressElement = document.getElementById(`progress-${modelName}`);
-    if (progressElement) {
-      progressElement.style.width = `${percentage}%`;
-    }
-  }
-
-  onModelLoaded(modelData) {
-    // Handle successful model load
-    // Maybe update camera to focus on the model
-    if (modelData.metadata.name === "MWX_School") {
-      this.controls.focusOnObject(modelData.scene, 20, 2000);
-    }
-  }
-
-  onModelLoadError(path, error) {
-    // Handle loading errors
-    console.error(`Failed to load ${path}:`, error);
-    // Show user-friendly error message
   }
 
   setupFocusTargets() {
@@ -258,8 +204,9 @@ export class ThreeScene {
   setInitialCameraFocus() {
     if (this.schoolModel) {
       console.log("ThreeScene: Setting initial focus on school");
+
       // Focus on the school with a good distance to see the whole building
-      this.controls.focusOnObject(this.schoolModel.scene, 300, 3000);
+      this.controls.focusOnObject(this.schoolModel.scene, 300, 1500);
     }
   }
 
@@ -274,21 +221,15 @@ export class ThreeScene {
     if (this.controls.presets.has("school")) {
       this.controls.loadPreset("school", duration);
     } else {
-      this.controls.focusOnObject(this.schoolModel.scene, 25, duration);
+      this.controls.focusOnObject(this.schoolModel.scene, 300, duration);
     }
 
     console.log("ThreeScene: Focused on school");
   };
 
-  // Get loading progress info
-  getLoadingProgress = () => {
-    return this.modelLoader
-      ? this.modelLoader.getLoadingProgress()
-      : { loading: 0, loaded: 0 };
-  };
-
-  // Event emitters for React integration (optional)
-  emitLoadingProgress = null; // Set this from React provider
+  // Event emitters for React integration
+  // These are set this in the React provider
+  emitLoadingProgress = null;
   emitModelLoaded = null;
   emitModelError = null;
 

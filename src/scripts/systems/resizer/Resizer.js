@@ -1,4 +1,8 @@
 const setSize = (container, camera, renderer) => {
+  // TODO: Container width, height may be better here
+  // In the case we want the three.js scene to be beside a  react component rather than under
+  // Also update renderer if change is made
+
   // Set the camera's aspect ratio
   camera.aspect = window.innerWidth / window.innerHeight;
 

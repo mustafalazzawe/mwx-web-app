@@ -9,11 +9,13 @@ class EnhancedControls {
     // Animation state
     this.isAnimating = false;
 
+    // Start and end positions
     this.targetPosition = new THREE.Vector3();
     this.targetTarget = new THREE.Vector3();
     this.startPosition = new THREE.Vector3();
     this.startTarget = new THREE.Vector3();
 
+    // Animation information
     this.animationStartTime = 0;
     this.animationProgress = 0;
     this.animationDuration = 1000;
@@ -160,7 +162,7 @@ class EnhancedControls {
   animateToTarget(
     targetPosition,
     targetTarget = null,
-    duration = 1000,
+    duration = 1500,
     easingFunction = null
   ) {
     // Stop any exisiting animation
@@ -197,7 +199,7 @@ class EnhancedControls {
   }
 
   // USE: Focus on an object with smart positioning
-  focusOnObject(object, distance = 5, duration = 1000) {
+  focusOnObject(object, distance = 5, duration = 1500) {
     // Calculate position behind the object
     const box = new THREE.Box3().setFromObject(object);
     const center = box.getCenter(new THREE.Vector3());
