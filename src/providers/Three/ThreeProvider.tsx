@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import { ThreeContext } from "./Three.context";
-import { ThreeScene } from "../scripts/main";
+import { ThreeScene } from "../../scripts/main";
 
 // Always check isInitialized before calling Three.js methods
 // Use the provided action methods instead of directly accessing Three.js objects

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import type { ThreeScene } from "../scripts/main";
+import type { ThreeScene } from "../../scripts/main";
 import type { RefObject } from "react";
 
 interface ICameraState {
