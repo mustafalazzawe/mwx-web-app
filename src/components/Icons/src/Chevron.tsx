@@ -1,0 +1,30 @@
+import { forwardRef, memo } from "react";
+import type { Ref } from "react";
+
+import IconWrapper from "../Icon.styled";
+import type { IIconProps } from "../Icon.types";
+
+const ChevronIcon = (props: IIconProps, ref: Ref<SVGSVGElement>) => (
+  <IconWrapper
+    width={props.fontSize || 24}
+    height={props.fontSize || 24}
+    viewBox="0 0 24 24"
+    fill="none"
+    $secondaryFill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    ref={ref}
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M9.99935 12.4792C9.88824 12.4792 9.78407 12.462 9.68685 12.4275C9.58963 12.3931 9.49935 12.3339 9.41602 12.25L5.58268 8.41671C5.4299 8.26393 5.35352 8.06948 5.35352 7.83337C5.35352 7.59726 5.4299 7.40282 5.58268 7.25004C5.73546 7.09726 5.9299 7.02087 6.16602 7.02087C6.40213 7.02087 6.59657 7.09726 6.74935 7.25004L9.99935 10.5L13.2493 7.25004C13.4021 7.09726 13.5966 7.02087 13.8327 7.02087C14.0688 7.02087 14.2632 7.09726 14.416 7.25004C14.5688 7.40282 14.6452 7.59726 14.6452 7.83337C14.6452 8.06948 14.5688 8.26393 14.416 8.41671L10.5827 12.25C10.4993 12.3334 10.4091 12.3925 10.3118 12.4275C10.2146 12.4625 10.1105 12.4798 9.99935 12.4792Z"
+      fill={props.fill || " "}
+    />
+  </IconWrapper>
+);
+
+const ForwardRef = forwardRef(ChevronIcon);
+const Memo = memo(ForwardRef);
+
+export default Memo;

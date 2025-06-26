@@ -1,7 +1,6 @@
 import React from "react";
 
 import Overlay from "./components/Overlay/Overlay";
-import "./App.css";
 
 function App() {
   return (

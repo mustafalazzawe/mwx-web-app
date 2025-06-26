@@ -200,20 +200,8 @@ const ThreeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThreeContext.Provider value={value}>
       {/* Three.js container - this is where the canvas will be appended */}
-      <div
-        ref={containerRef}
-        className="scene-container"
-        style={{
-          width: "100vw",
-          height: "100vh",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: 1,
-          background: "#000",
-        }}
-      >
-        {/* Loading indicator */}
+      <div ref={containerRef} className="scene-container">
+        {/* TEMP: Loading indicator, will need to make a better looking one later */}
         {!isInitialized && (
           <div
             style={{
@@ -223,7 +211,6 @@ const ThreeProvider: FC<PropsWithChildren> = ({ children }) => {
               transform: "translate(-50%, -50%)",
               zIndex: 5,
               color: "white",
-              fontSize: "18px",
               background: "rgba(0,0,0,0.8)",
               padding: "20px",
               borderRadius: "8px",
@@ -235,7 +222,7 @@ const ThreeProvider: FC<PropsWithChildren> = ({ children }) => {
       </div>
 
       {/* React overlay content */}
-      <div style={{ position: "relative", zIndex: 10 }}>{children}</div>
+      <div className="overlay">{children}</div>
     </ThreeContext.Provider>
   );
 };

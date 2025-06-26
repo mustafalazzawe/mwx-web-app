@@ -1,5 +1,7 @@
 import type { CSSProp } from "styled-components";
 import type { palettes } from "./Theme.palettes";
+import type { themeVars } from "./Theme";
+import type { ButtonStyles } from "../../components/Button/Button.variants";
 
 export type TThemePalettes = typeof palettes;
 export type TThemeModes = "light" | "dark";
@@ -14,6 +16,7 @@ export interface IThemeSemanticColors {
     "bg-tertiary": string;
     "bg-quaternary": string;
   };
+  accent: string;
   interactive: {
     "interactive-text": string;
     "interactive-text-hover": string;
@@ -23,8 +26,13 @@ export interface IThemeSemanticColors {
     "interactive-button-active": string;
   };
   border: {
-    "01": string;
-    "02": string;
+    primary: string;
+    secondary: string;
+  };
+  severity: {
+    bad: string;
+    caution: string;
+    good: string;
   };
 }
 
@@ -42,11 +50,11 @@ export interface IThemeTypography {
     medium: CSSProp;
   };
   body: {
-    "01": {
+    primary: {
       regular: CSSProp;
       medium: CSSProp;
     };
-    "02": {
+    secondary: {
       regular: CSSProp;
       medium: CSSProp;
     };
@@ -94,13 +102,13 @@ export interface IThemeEffects {
 
 export interface IThemeCommonStyles {
   border: {
-    main: CSSProp;
-    nav: CSSProp;
+    main: string;
+    nav: string;
   };
 }
 
 export interface IThemeComponents {
-  buttons: "";
+  buttons: typeof ButtonStyles;
 }
 
 export interface IThemeProps {
@@ -112,7 +120,8 @@ export interface IThemeProps {
   commonStyles: IThemeCommonStyles;
   components: IThemeComponents;
 }
-
 export interface IThemeState {
   mode: TThemeModes;
 }
+
+export type TTheme = typeof themeVars;

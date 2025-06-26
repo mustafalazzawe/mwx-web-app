@@ -6,11 +6,19 @@ import GlobalStyles from "./Theme.global";
 import { ThemeContext } from "./Theme.context";
 import type { IThemeProps, TThemeModes } from "./Theme.types";
 
-export const ThemeProvider: FC<PropsWithChildren<IThemeProps>> = ({
+const ThemeProvider: FC<PropsWithChildren<IThemeProps>> = ({
   children,
-  // ...props
+  ...props
 }) => {
-  // const { palettes, modes, typography, breakpoints, components } = props;
+  const {
+    palettes,
+    semanticColors,
+    typography,
+    breakpoints,
+    effects,
+    commonStyles,
+    components,
+  } = props;
 
   // For now there is only a dark mode
   const [mode] = useState<TThemeModes>("dark");
@@ -19,7 +27,17 @@ export const ThemeProvider: FC<PropsWithChildren<IThemeProps>> = ({
 
   return (
     <ThemeContext.Provider value={value}>
-      <StyledComponentsThemeProvider theme={{}}>
+      <StyledComponentsThemeProvider
+        theme={{
+          palettes,
+          semanticColors,
+          typography,
+          breakpoints,
+          effects,
+          commonStyles,
+          components,
+        }}
+      >
         <GlobalStyles />
 
         {children}
@@ -27,3 +45,5 @@ export const ThemeProvider: FC<PropsWithChildren<IThemeProps>> = ({
     </ThemeContext.Provider>
   );
 };
+
+export default ThemeProvider;

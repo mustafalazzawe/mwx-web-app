@@ -1,7 +1,9 @@
+import TopNav from "../Navbars/TopNav/TopNav";
+
 const Overlay = () => {
   return (
     <div>
-      Overlay Content
+      <TopNav />
     </div>
   );
 };
