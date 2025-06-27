@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import type { ITopNavButtons } from "./TopNav.types";
 
 export const TopNavWrapper = styled.nav`
   display: grid;
@@ -43,7 +44,6 @@ export const TopNavCenter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
 
   width: 100%;
   height: 100%;
@@ -77,5 +77,40 @@ export const Hamburger = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
     display: flex;
+  }
+`;
+
+export const TopNavButtons = styled.div<ITopNavButtons>`
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  height: 100%;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1.5px;
+
+    background: linear-gradient(
+      ${({ $activeButton }) =>
+        $activeButton === "Model" ? "to left" : "to right"},
+      rgba(255, 255, 255, 0) 52%,
+      rgba(255, 255, 255, 0.3) 64%,
+      rgba(255, 255, 255, 1) 76%,
+      rgba(255, 255, 255, 0.3) 88%,
+      rgba(255, 255, 255, 0) 100%
+    );
+
+    pointer-events: none;
+    z-index: 1;
   }
 `;

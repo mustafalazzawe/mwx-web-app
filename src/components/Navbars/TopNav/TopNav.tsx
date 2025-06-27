@@ -1,8 +1,9 @@
 import Button from "../../Button/Button";
-import { Icon } from "../../Icons/Icon";
 import Logo from "../../Logo/Logo";
+import { Icon } from "../../Icons/Icon";
 import {
   Hamburger,
+  TopNavButtons,
   TopNavCenter,
   TopNavLeft,
   TopNavRight,
@@ -17,14 +18,22 @@ const TopNav = () => {
       </TopNavLeft>
 
       <TopNavCenter>
-        <div style={{ borderBottom: "1.5px solid rgba(255, 255, 255, 0.00)" }}>
-          <Button style={{ width: "128px" }} $variant={"Label"}>
+        <TopNavButtons $activeButton="Model">
+          <Button
+            style={{ width: "128px", height: "100%" }}
+            $variant={"Label"}
+            $isTogglable
+          >
             Model
           </Button>
-        </div>
-        <Button style={{ width: "128px" }} $variant={"Label"}>
-          Dashboard
-        </Button>
+          <Button
+            style={{ width: "128px", height: "100%" }}
+            $variant={"Label"}
+            $isTogglable
+          >
+            Dashboard
+          </Button>
+        </TopNavButtons>
       </TopNavCenter>
       <TopNavRight>RIGHT</TopNavRight>
       <Hamburger>
