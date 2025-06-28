@@ -9,12 +9,16 @@ export type TThemeModes = "light" | "dark";
 export interface IThemeSemanticColors {
   foreground: {
     "fg-primary": string;
+    "fg-secondary": string;
   };
   background: {
     "bg-primary": string;
-    "bg-secondary": string;
-    "bg-tertiary": string;
-    "bg-quaternary": string;
+  }
+  surface: {
+    "50": string;
+    "100": string;
+    "200": string;
+    "300": string;
   };
   accent: string;
   interactive: {

@@ -47,4 +47,11 @@ export const ButtonStyles: IButtonStyles = {
       `}
     `}
   `,
+  Icon: () => css`
+    padding: 0;
+
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+  `,
 };

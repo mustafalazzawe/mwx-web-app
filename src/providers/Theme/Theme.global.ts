@@ -17,7 +17,9 @@ const GlobalStyles = createGlobalStyle`
     height: 100vh;
     overflow: hidden;
 
-    ${({theme}) => theme.typography.body.primary.medium}
+    ${({ theme }) => theme.typography.body.primary.medium}
+
+    color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
   }
 
   canvas {
@@ -44,6 +46,14 @@ const GlobalStyles = createGlobalStyle`
   .overlay {
     position: relative; 
     z-index: 10;
+
+    /* CRITICAL: Allow Three.js interaction by default */
+    pointer-events: none;
+    
+    /* Only overlay children with specific classes get pointer events */
+    > * {
+      pointer-events: auto;
+    }
   }
 `;
 
