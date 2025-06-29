@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DashboardViewWrapper = styled.div`
   position: relative;
@@ -10,7 +10,7 @@ export const DashboardViewWrapper = styled.div`
   width: 100vw;
 
   overflow: hidden;
-  
+
   background-color: ${({ theme }) => theme.palettes.greyscale[800]};
 `;
 
@@ -20,7 +20,7 @@ export const DashboardContent = styled.div`
   padding: 32px;
 
   overflow-y: auto;
-  
+
   h1 {
     ${({ theme }) => theme.typography.title.medium}
     color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
@@ -44,22 +44,23 @@ export const DashboardContent = styled.div`
     height: 50%;
     gap: 16px;
     text-align: center;
-    
+
     h2 {
       ${({ theme }) => theme.typography.subtitle.medium}
       color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
     }
-    
+
     button {
       padding: 12px 24px;
       border: ${({ theme }) => theme.commonStyles.border.main};
       border-radius: 4px;
-      background-color: ${({ theme }) => theme.semanticColors.background["bg-primary"]};
+      background-color: ${({ theme }) =>
+        theme.semanticColors.background["bg-primary"]};
       color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
       ${({ theme }) => theme.typography.body.secondary.medium}
       cursor: pointer;
       transition: all 0.2s ease;
-      
+
       &:hover {
         background-color: ${({ theme }) => theme.semanticColors.accent};
         border-color: ${({ theme }) => theme.semanticColors.accent};
@@ -77,8 +78,12 @@ export const DashboardContent = styled.div`
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -87,16 +92,22 @@ export const MetricsGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   width: 100%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const MetricCard = styled.div<{ $hasAlert?: boolean }>`
   padding: 24px;
-  
+
   background-color: ${({ theme }) => theme.semanticColors.surface["100"]};
   border-radius: 8px;
   ${({ theme }) => theme.effects.surface.default}
-  
-  ${({ $hasAlert, theme }) => $hasAlert && `
+
+  ${({ $hasAlert, theme }) =>
+    $hasAlert &&
+    `
     border-color: ${theme.semanticColors.severity.caution};
     ${theme.effects.text.severity.caution}
   `}
@@ -106,12 +117,13 @@ export const MetricCard = styled.div<{ $hasAlert?: boolean }>`
     color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
     margin-bottom: 16px;
   }
-  
+
   .metric-value {
     ${({ theme }) => theme.typography.title.medium}
-    color: ${({ theme, $hasAlert }) => 
-      $hasAlert ? theme.semanticColors.severity.caution : theme.semanticColors.accent
-    };
+    color: ${({ theme, $hasAlert }) =>
+      $hasAlert
+        ? theme.semanticColors.severity.caution
+        : theme.semanticColors.accent};
     font-size: 3rem;
     line-height: 1;
     font-weight: 600;
