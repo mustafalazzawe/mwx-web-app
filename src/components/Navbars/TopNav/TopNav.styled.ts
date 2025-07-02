@@ -14,7 +14,7 @@ export const TopNavWrapper = styled.nav`
   min-height: 64px;
   max-height: 64px;
 
-  padding: 0px 32px;
+  padding: 0 32px;
 
   background-color: ${({ theme }) => theme.semanticColors.surface["300"]};
 

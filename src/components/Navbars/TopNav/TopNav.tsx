@@ -1,5 +1,5 @@
-import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import type { FC } from "react";
 
 import {
   Hamburger,
@@ -14,7 +14,7 @@ import Button from "../../Button/Button";
 import { Icon } from "../../Icons/Icon";
 import type { TTopNavButtons } from "./TopNav.types";
 
-const TopNav: React.FC = () => {
+const TopNav: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -61,7 +61,10 @@ const TopNav: React.FC = () => {
       </TopNavCenter>
 
       <TopNavRight>
-        <Button $variant="Icon" onClick={() => console.log("Notification Clicked")}>
+        <Button
+          $variant="Icon"
+          onClick={() => console.log("Notification Clicked")}
+        >
           <Icon iconName="Notification" fontSize="20px" />
         </Button>
         <Button $variant="Icon" onClick={() => console.log("User Clicked")}>
