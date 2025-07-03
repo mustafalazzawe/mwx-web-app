@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const ModelViewWrapper = styled.div`
-  display: grid;
-  grid-template-rows: 64px 1fr 48px;
-
+  display: flex;
+  flex-direction: column;
+  
   width: 100vw;
   height: 100vh;
 
@@ -22,7 +22,7 @@ export const ModelViewWrapper = styled.div`
 `;
 
 export const ModelContentArea = styled.div`
-  grid-row: 2;
+  flex: 1;
 
   position: relative;
   overflow: hidden;

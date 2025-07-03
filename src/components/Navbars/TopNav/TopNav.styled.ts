@@ -22,9 +22,11 @@ export const TopNavWrapper = styled.nav`
   ${({ theme }) => theme.effects.surface.default}
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas: "left . hamburger";
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "left hamburger";
     column-gap: 16px;
+
+    padding: 0 16px;
   }
 `;
 
@@ -34,7 +36,6 @@ export const TopNavLeft = styled.div`
   display: flex;
   align-items: center;
 
-  /* width: 124px; */
   height: 100%;
 `;
 
@@ -61,7 +62,6 @@ export const TopNavRight = styled.div`
   align-items: center;
   gap: 16px;
 
-  /* width: 124px; */
   height: 100%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
@@ -73,8 +73,8 @@ export const Hamburger = styled.div`
   grid-area: hamburger;
 
   display: none;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
 
   height: 100%;
 

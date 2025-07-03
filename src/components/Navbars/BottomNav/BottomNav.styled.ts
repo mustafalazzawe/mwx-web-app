@@ -9,9 +9,9 @@ export const BottomNavWrapper = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 48px;
-  min-height: 48px;
-  max-height: 48px;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
 
   padding: 0 32px;
 
@@ -19,6 +19,12 @@ export const BottomNavWrapper = styled.div`
 
   border-top: ${({ theme }) => theme.commonStyles.border.nav};
   ${({ theme }) => theme.effects.surface.default}
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
+    column-gap: 16px;
+
+    padding: 0 16px;
+  }
 `;
 
 export const BottomNavLeft = styled.div`

@@ -62,18 +62,27 @@ const TopNav: FC = () => {
 
       <TopNavRight>
         <Button
+          style={{ height: "100%" }}
           $variant="Icon"
           onClick={() => console.log("Notification Clicked")}
         >
-          <Icon iconName="Notification" fontSize="20px" />
+          <Icon iconName="Notification" fontSize="24px" />
         </Button>
-        <Button $variant="Icon" onClick={() => console.log("User Clicked")}>
-          <Icon iconName="User" fontSize="20px" />
+        <Button
+          style={{ height: "100%" }}
+          $variant="Icon"
+          onClick={() => console.log("User Clicked")}
+        >
+          <Icon iconName="User" fontSize="24px" />
         </Button>
       </TopNavRight>
 
       <Hamburger>
-        <Button $variant="Icon" onClick={() => console.log("Menu Clicked")}>
+        <Button
+          style={{ padding: "16px 0 16px 16px" }}
+          $variant="Icon"
+          onClick={() => console.log("Menu Clicked")}
+        >
           <Icon iconName="Menu" fontSize="32px" />
         </Button>
       </Hamburger>

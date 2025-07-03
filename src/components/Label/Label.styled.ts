@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 
 export const Label = styled.div`
-  padding: 8px;
+  padding: 0;
 
-  ${({ theme }) => theme.semanticColors.foreground["fg-secondary"]}
+  color: ${({ theme }) => theme.semanticColors.foreground["fg-secondary"]};
 
   ${({ theme }) => theme.typography.body.secondary.regular}
 `;

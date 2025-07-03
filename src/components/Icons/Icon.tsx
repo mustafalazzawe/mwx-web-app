@@ -12,7 +12,7 @@ export const Icon: FC<IIconProps> = (props) => {
 
   const {
     iconName,
-    fontSize = 20,
+    fontSize = 24,
     $secondaryFill = semanticColors.accent,
     $effects = { hasEffects: false },
     ...rest
