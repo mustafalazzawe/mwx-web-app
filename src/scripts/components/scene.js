@@ -5,7 +5,7 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 function createScene() {
   const scene = new THREE.Scene();
 
-  const hdrEnv = new RGBELoader().loadAsync('/public/textures/HDRISky.hdr').then( hdrEnv => {
+  const hdrEnv = new RGBELoader().loadAsync('/textures/HDRISky.hdr').then( hdrEnv => {
     hdrEnv.mapping = THREE.EquirectangularReflectionMapping;
 
     scene.environment = hdrEnv;

@@ -3,7 +3,7 @@ import type { ITopNavButtons } from "./TopNav.types";
 
 export const TopNavWrapper = styled.nav`
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
   grid-template-areas: "left center right";
   column-gap: 32px;
 
@@ -14,18 +14,19 @@ export const TopNavWrapper = styled.nav`
   min-height: 64px;
   max-height: 64px;
 
-  padding: 0px 24px;
+  padding: 0 32px;
 
-  background-color: ${({ theme }) =>
-    theme.semanticColors.background["bg-primary"]};
+  background-color: ${({ theme }) => theme.semanticColors.surface["300"]};
 
   border-bottom: ${({ theme }) => theme.commonStyles.border.nav};
   ${({ theme }) => theme.effects.surface.default}
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas: "left . hamburger";
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "left hamburger";
     column-gap: 16px;
+
+    padding: 0 16px;
   }
 `;
 
@@ -57,7 +58,9 @@ export const TopNavRight = styled.div`
   grid-area: right;
 
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  gap: 16px;
 
   height: 100%;
 
@@ -70,8 +73,8 @@ export const Hamburger = styled.div`
   grid-area: hamburger;
 
   display: none;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
 
   height: 100%;
 

@@ -9,6 +9,7 @@ import {
 
 import { ThreeContext } from "./Three.context";
 import { ThreeScene } from "../../scripts/main";
+import LoadingOverlay from "../../components/Loading/LoadingOverlay";
 
 // Always check isInitialized before calling Three.js methods
 // Use the provided action methods instead of directly accessing Three.js objects
@@ -201,24 +202,7 @@ const ThreeProvider: FC<PropsWithChildren> = ({ children }) => {
     <ThreeContext.Provider value={value}>
       {/* Three.js container - this is where the canvas will be appended */}
       <div ref={containerRef} className="scene-container">
-        {/* TEMP: Loading indicator, will need to make a better looking one later */}
-        {!isInitialized && (
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 5,
-              color: "white",
-              background: "rgba(0,0,0,0.8)",
-              padding: "20px",
-              borderRadius: "8px",
-            }}
-          >
-            Loading Three.js Scene...
-          </div>
-        )}
+        {!isInitialized && <LoadingOverlay />}
       </div>
 
       {/* React overlay content */}

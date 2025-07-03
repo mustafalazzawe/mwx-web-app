@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes } from "react";
 import type { CSSProp } from "styled-components";
 import type { TTheme } from "../../providers/Theme/Theme.types";
 
-export type TButtonVariants = "Label";
+export type TButtonVariants = "Label" | "Icon";
 
 export interface IButtonVariantProps {
   theme: TTheme;
@@ -12,6 +12,7 @@ export interface IButtonVariantProps {
 
 export interface IButtonStyles {
   Label: ((props: IButtonVariantProps) => CSSProp) | CSSProp;
+  Icon: ((props: IButtonVariantProps) => CSSProp) | CSSProp;
 }
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

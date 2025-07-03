@@ -27,7 +27,7 @@ export declare class ThreeScene {
 
   // Preset management
   saveCurrentView: (name: string) => void;
-  loadView: (name: string, duration: number) => void;
+  loadView: (name: string, duration?: number) => void;
 
   // State management
   getCameraState: () => {

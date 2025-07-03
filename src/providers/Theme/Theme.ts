@@ -14,12 +14,16 @@ import { ButtonStyles } from "../../components/Button/Button.variants";
 const semanticColors: IThemeSemanticColors = {
   foreground: {
     "fg-primary": palettes.greyscale[50],
+    "fg-secondary": palettes.greyscale[100],
   },
   background: {
-    "bg-primary": palettes.surface[300],
-    "bg-secondary": palettes.surface[200],
-    "bg-tertiary": palettes.surface[100],
-    "bg-quaternary": palettes.surface[50],
+    "bg-primary": palettes.greyscale[800],
+  },
+  surface: {
+    "50": palettes.surface[50],
+    "100": palettes.surface[100],
+    "200": palettes.surface[200],
+    "300": palettes.surface[300],
   },
   accent: palettes.accent[300],
   interactive: {

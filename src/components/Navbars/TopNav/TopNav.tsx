@@ -1,6 +1,6 @@
-import Button from "../../Button/Button";
-import Logo from "../../Logo/Logo";
-import { Icon } from "../../Icons/Icon";
+import { useNavigate, useLocation } from "react-router-dom";
+import type { FC } from "react";
+
 import {
   Hamburger,
   TopNavButtons,
@@ -9,8 +9,28 @@ import {
   TopNavRight,
   TopNavWrapper,
 } from "./TopNav.styled";
+import Logo from "../../Logo/Logo";
+import Button from "../../Button/Button";
+import { Icon } from "../../Icons/Icon";
+import type { TTopNavButtons } from "./TopNav.types";
 
-const TopNav = () => {
+const TopNav: FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Determine active page from current route
+  const getActivePageFromPath = (pathname: string): TTopNavButtons => {
+    if (pathname === "/dashboard") return "Dashboard";
+    return "Model"; // Default to Model for '/' or unknown routes
+  };
+
+  const activePage = getActivePageFromPath(location.pathname);
+
+  const handlePageChange = (page: TTopNavButtons) => {
+    const path = page === "Model" ? "/" : "/dashboard";
+    navigate(path);
+  };
+
   return (
     <TopNavWrapper>
       <TopNavLeft>
@@ -18,27 +38,53 @@ const TopNav = () => {
       </TopNavLeft>
 
       <TopNavCenter>
-        <TopNavButtons $activeButton="Model">
+        <TopNavButtons $activeButton={activePage}>
           <Button
             style={{ width: "128px", height: "100%" }}
-            $variant={"Label"}
+            $variant="Label"
             $isTogglable
+            $isToggled={activePage === "Model"}
+            $onToggle={() => handlePageChange("Model")}
           >
             Model
           </Button>
           <Button
             style={{ width: "128px", height: "100%" }}
-            $variant={"Label"}
+            $variant="Label"
             $isTogglable
+            $isToggled={activePage === "Dashboard"}
+            $onToggle={() => handlePageChange("Dashboard")}
           >
             Dashboard
           </Button>
         </TopNavButtons>
       </TopNavCenter>
-      <TopNavRight>RIGHT</TopNavRight>
+
+      <TopNavRight>
+        <Button
+          style={{ height: "100%" }}
+          $variant="Icon"
+          onClick={() => console.log("Notification Clicked")}
+        >
+          <Icon iconName="Notification" fontSize="24px" />
+        </Button>
+        <Button
+          style={{ height: "100%" }}
+          $variant="Icon"
+          onClick={() => console.log("User Clicked")}
+        >
+          <Icon iconName="User" fontSize="24px" />
+        </Button>
+      </TopNavRight>
+
       <Hamburger>
-        {/* TODO: Update to icon button */}
-        <Icon iconName="Menu" fontSize="32px"></Icon>
+        <Button
+          style={{ padding: "16px 0 16px 16px" }}
+          $variant="Icon"
+          onClick={() => console.log("Menu Clicked")}
+        >
+          <Icon iconName="Menu" fontSize="32px" />
+        </Button>
       </Hamburger>
     </TopNavWrapper>
   );

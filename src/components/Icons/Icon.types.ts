@@ -5,6 +5,7 @@ import type { CSSProp } from "styled-components";
 
 export type TIconComponents =
   | "Chevron"
+  | "Cross"
   | "Menu"
   | "Notification"
   | "NotificationNew"

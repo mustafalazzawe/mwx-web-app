@@ -36,6 +36,7 @@ export const ButtonStyles: IButtonStyles = {
       ${$isToggled &&
       css`
         color: ${theme.semanticColors.interactive["interactive-text-active"]};
+        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 8px ${({theme}) => theme.semanticColors.accent};
 
         &:hover {
           color: ${theme.semanticColors.interactive["interactive-text-hover"]};
@@ -46,5 +47,12 @@ export const ButtonStyles: IButtonStyles = {
         }
       `}
     `}
+  `,
+  Icon: () => css`
+    padding: 0;
+
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
   `,
 };
