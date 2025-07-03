@@ -3,6 +3,8 @@ import Button from "../Button/Button";
 import { TutorialWrapper } from "./Tutorial.styled";
 import type { ITutorialProps } from "./Tutorial.types";
 
+// TODO: Update tutorial component
+
 const Tutorial: FC<ITutorialProps> = ({ onDismiss }) => {
   return (
     <TutorialWrapper>

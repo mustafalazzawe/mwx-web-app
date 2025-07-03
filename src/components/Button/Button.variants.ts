@@ -8,7 +8,6 @@ export const ButtonStyles: IButtonStyles = {
     background-color: transparent;
     border: none;
 
-    /* Base styles */
     &:hover {
       color: ${theme.semanticColors.interactive["interactive-text-hover"]};
       transition: color 100ms ease-in;
@@ -54,5 +53,10 @@ export const ButtonStyles: IButtonStyles = {
     background-color: transparent;
     border-radius: 0;
     border: none;
+  `,
+  Primary: () => css``,
+  Secondary: () => css``,
+  Tertiary: () => css`
+
   `,
 };

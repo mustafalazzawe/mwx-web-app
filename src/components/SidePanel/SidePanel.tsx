@@ -71,13 +71,12 @@ const SidePanel: FC<ISidePanelProps> = (props) => {
       <SidePanelContainer isOpen={isOpen}>
         <SidePanelHeader>
           <h3>Navigation</h3>
-          <CloseButton onClick={onClose} aria-label="Close navigation">
-            <Icon iconName={"Cross"} fontSize="20px" />
+          <CloseButton onClick={onClose}>
+            <Icon iconName={"Cross"} fontSize="24px" />
           </CloseButton>
         </SidePanelHeader>
 
         <SidePanelContent>
-          {/* Main Navigation */}
           <NavigationSection>
             <h4>Pages</h4>
             <NavigationList>
@@ -85,36 +84,33 @@ const SidePanel: FC<ISidePanelProps> = (props) => {
                 isActive={activePage === "Model"}
                 onClick={() => handlePageChange("Model")}
               >
-                <span className="nav-icon">M</span>
-                <span className="nav-label">3D Model</span>
+                <span className="nav-label">Model</span>
               </NavigationItem>
 
               <NavigationItem
                 isActive={activePage === "Dashboard"}
                 onClick={() => handlePageChange("Dashboard")}
               >
-                <span className="nav-icon">D</span>
                 <span className="nav-label">Dashboard</span>
               </NavigationItem>
             </NavigationList>
           </NavigationSection>
 
-          {/* Account Actions */}
           <NavigationSection>
-            <h4>Account</h4>
+            <h4>Actions</h4>
             <NavigationList>
               <NavigationItem onClick={handleNotificationClick}>
                 <span className="nav-icon">
-                  <Icon iconName="Notification" fontSize="20px" />
+                  <Icon iconName="Notification" fontSize="24px" />
                 </span>
                 <span className="nav-label">Notifications</span>
               </NavigationItem>
 
               <NavigationItem onClick={handleUserClick}>
                 <span className="nav-icon">
-                  <Icon iconName="User" fontSize="20px" />
+                  <Icon iconName="User" fontSize="24px" />
                 </span>
-                <span className="nav-label">Account Settings</span>
+                <span className="nav-label">Account</span>
               </NavigationItem>
             </NavigationList>
           </NavigationSection>

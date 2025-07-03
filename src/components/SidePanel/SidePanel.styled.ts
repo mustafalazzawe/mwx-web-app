@@ -2,45 +2,49 @@ import styled from "styled-components";
 
 export const SidePanelOverlay = styled.div<{ isOpen: boolean }>`
   position: fixed;
+
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${({ theme }) => theme.palettes.alpha[700]};
   backdrop-filter: blur(4px);
-
-  z-index: 1000;
 
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+
   pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
 
   transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  z-index: 1000;
 `;
 
 export const SidePanelContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
+
   top: 0;
   right: 0;
   bottom: 0;
+
+  display: flex;
+  flex-direction: column;
 
   width: 320px;
   max-width: 80vw;
 
   background-color: ${({ theme }) => theme.semanticColors.surface["300"]};
   border-left: ${({ theme }) => theme.commonStyles.border.nav};
+
   ${({ theme }) => theme.effects.surface.default}
 
   transform: translateX(${({ isOpen }) => (isOpen ? "0" : "100%")});
   transition: transform 0.3s ease;
 
-  z-index: 1001;
-
-  display: flex;
-  flex-direction: column;
-
   pointer-events: auto;
+
+  z-index: 1001;
 `;
 
 export const SidePanelHeader = styled.div`
@@ -54,7 +58,6 @@ export const SidePanelHeader = styled.div`
   h3 {
     ${({ theme }) => theme.typography.subtitle.medium}
     color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
-    margin: 0;
   }
 `;
 
@@ -73,9 +76,9 @@ export const NavigationSection = styled.div`
 
   h4 {
     ${({ theme }) => theme.typography.body.primary.medium}
-    color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
+    color: ${({ theme }) => theme.semanticColors.foreground["fg-secondary"]};
+
     margin-bottom: 16px;
-    opacity: 0.8;
   }
 `;
 
@@ -88,17 +91,13 @@ export const NavigationList = styled.div`
 export const NavigationItem = styled.button<{ isActive?: boolean }>`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 
   width: 100%;
-  padding: 12px 16px;
+  padding: 16px 24px;
 
-  background-color: ${({ theme, isActive }) =>
-    isActive ? theme.semanticColors.surface[200] : "transparent"};
-  border: ${({ theme, isActive }) =>
-    isActive
-      ? `1px solid ${theme.semanticColors.accent}`
-      : "1px solid transparent"};
+  background-color: transparent;
+  border: none;
   border-radius: 8px;
 
   color: ${({ theme, isActive }) =>
@@ -106,11 +105,17 @@ export const NavigationItem = styled.button<{ isActive?: boolean }>`
       ? theme.semanticColors.interactive["interactive-text-active"]
       : theme.semanticColors.interactive["interactive-text"]};
 
+  text-shadow: ${({ theme, isActive }) =>
+    isActive
+      ? `0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 8px ${theme.semanticColors.accent}`
+      : "none"};
+
   ${({ theme }) => theme.typography.body.secondary.medium}
+  text-align: left;
 
   cursor: pointer;
+
   transition: all 0.2s ease;
-  text-align: left;
 
   &:hover {
     background-color: ${({ theme }) => theme.semanticColors.surface[100]};
@@ -124,7 +129,10 @@ export const NavigationItem = styled.button<{ isActive?: boolean }>`
 
   .nav-icon {
     flex-shrink: 0;
-    opacity: 0.8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .nav-label {
@@ -133,21 +141,17 @@ export const NavigationItem = styled.button<{ isActive?: boolean }>`
 `;
 
 export const CloseButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   padding: 8px;
+
   background-color: transparent;
   border: none;
   border-radius: 4px;
 
   color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
+  
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.semanticColors.surface[200]};
-  }
 `;

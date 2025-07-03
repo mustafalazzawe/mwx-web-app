@@ -14,12 +14,11 @@ export const TutorialWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: ${({ theme }) => theme.palettes.alpha[900]};
   backdrop-filter: blur(4px);
 
   .controls-content {
-    background-color: ${({ theme }) =>
-      theme.semanticColors.surface["300"]};
+    background-color: ${({ theme }) => theme.semanticColors.surface["300"]};
 
     border-radius: 8px;
 
