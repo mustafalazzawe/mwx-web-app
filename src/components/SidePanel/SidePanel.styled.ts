@@ -1,45 +1,46 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const SidePanelOverlay = styled.div<{ isOpen: boolean }>`
   position: fixed;
-
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
 
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
 
-  pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-
-  transition: opacity 0.3s ease;
-
   z-index: 1000;
+
+  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
+
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 `;
 
 export const SidePanelContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
-
   top: 0;
   right: 0;
   bottom: 0;
 
-  display: flex;
-  flex-direction: column;
-
   width: 320px;
   max-width: 80vw;
 
-  background-color: ${({ theme }) => theme.semanticColors.surface[300]};
+  background-color: ${({ theme }) => theme.semanticColors.surface["300"]};
   border-left: ${({ theme }) => theme.commonStyles.border.nav};
-  ${({ theme }) => theme.effects.surface.default};
+  ${({ theme }) => theme.effects.surface.default}
 
   transform: translateX(${({ isOpen }) => (isOpen ? "0" : "100%")});
   transition: transform 0.3s ease;
 
   z-index: 1001;
+
+  display: flex;
+  flex-direction: column;
+
+  pointer-events: auto;
 `;
 
 export const SidePanelHeader = styled.div`
@@ -48,11 +49,10 @@ export const SidePanelHeader = styled.div`
   align-items: center;
 
   padding: 16px 24px;
-
   border-bottom: ${({ theme }) => theme.commonStyles.border.nav};
 
   h3 {
-    ${({ theme }) => theme.typography.subtitle.medium};
+    ${({ theme }) => theme.typography.subtitle.medium}
     color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
     margin: 0;
   }
