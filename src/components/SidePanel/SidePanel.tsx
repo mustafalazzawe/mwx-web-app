@@ -1,12 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import type { FC } from "react";
 
-import type { ISidePanelProps } from "./SidePanel.types";
 import { Icon } from "../Icons/Icon";
-import type { TTopNavButtons } from "../Navbars/TopNav/TopNav.types";
 import {
-  CloseButton,
-  NavigationItem,
   NavigationList,
   NavigationSection,
   SidePanelContainer,
@@ -14,6 +10,9 @@ import {
   SidePanelHeader,
   SidePanelOverlay,
 } from "./SidePanel.styled";
+import Button from "../Button/Button";
+import type { TTopNavButtons } from "../Navbars/TopNav/TopNav.types";
+import type { ISidePanelProps } from "./SidePanel.types";
 
 const SidePanel: FC<ISidePanelProps> = (props) => {
   const { isOpen, onClose } = props;
@@ -71,47 +70,61 @@ const SidePanel: FC<ISidePanelProps> = (props) => {
       <SidePanelContainer isOpen={isOpen}>
         <SidePanelHeader>
           <h3>Navigation</h3>
-          <CloseButton onClick={onClose}>
+          <Button $variant={"Icon"} onClick={onClose}>
             <Icon iconName={"Cross"} fontSize="24px" />
-          </CloseButton>
+          </Button>
         </SidePanelHeader>
 
         <SidePanelContent>
           <NavigationSection>
             <h4>Pages</h4>
             <NavigationList>
-              <NavigationItem
-                isActive={activePage === "Model"}
-                onClick={() => handlePageChange("Model")}
+              <Button
+                style={{ padding: "16px 24px", textAlign: "left" }}
+                $variant={"Tertiary"}
+                $isTogglable
+                $isToggled={activePage === "Model"}
+                $onToggle={() => handlePageChange("Model")}
               >
                 <span className="nav-label">Model</span>
-              </NavigationItem>
+              </Button>
 
-              <NavigationItem
-                isActive={activePage === "Dashboard"}
-                onClick={() => handlePageChange("Dashboard")}
+              <Button
+                style={{ padding: "16px 24px", textAlign: "left" }}
+                $variant={"Tertiary"}
+                $isTogglable
+                $isToggled={activePage === "Dashboard"}
+                $onToggle={() => handlePageChange("Dashboard")}
               >
                 <span className="nav-label">Dashboard</span>
-              </NavigationItem>
+              </Button>
             </NavigationList>
           </NavigationSection>
 
           <NavigationSection>
             <h4>Actions</h4>
             <NavigationList>
-              <NavigationItem onClick={handleNotificationClick}>
+              <Button
+                style={{ padding: "16px 24px", textAlign: "left" }}
+                $variant={"Tertiary"}
+                onClick={handleNotificationClick}
+              >
                 <span className="nav-icon">
-                  <Icon iconName="Notification" fontSize="24px" />
+                  <Icon iconName="Notification" fontSize="20px" />
                 </span>
                 <span className="nav-label">Notifications</span>
-              </NavigationItem>
+              </Button>
 
-              <NavigationItem onClick={handleUserClick}>
+              <Button
+                style={{ padding: "16px 24px", textAlign: "left" }}
+                $variant={"Tertiary"}
+                onClick={handleUserClick}
+              >
                 <span className="nav-icon">
-                  <Icon iconName="User" fontSize="24px" />
+                  <Icon iconName="User" fontSize="20px" />
                 </span>
                 <span className="nav-label">Account</span>
-              </NavigationItem>
+              </Button>
             </NavigationList>
           </NavigationSection>
         </SidePanelContent>
