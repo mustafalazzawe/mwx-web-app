@@ -13,10 +13,10 @@ class ModelLoader {
     // Cache loaded models
     this.cache = new Map();
 
-    // Trach loading promises
+    // Track loading promises
     this.loadingPromises = new Map();
 
-    // Default configuration
+    // Default configuration with Vite-aware paths
     this.config = {
       enableShadows: true,
       ktx2TranscoderPath:
@@ -91,7 +91,7 @@ class ModelLoader {
 
   performLoad(path, options) {
     return new Promise((resolve, reject) => {
-      console.log(`ModelLoader: Loading ${options.name || path}`);
+      console.log(`ModelLoader: Loading ${options.name || path} from ${path}`);
 
       this.gltfLoader.load(
         path,
@@ -143,7 +143,7 @@ class ModelLoader {
     const scene = gltf.scene.clone();
     scene.name = options.name;
 
-   // Apply position
+    // Apply position
     if (options.position) {
       scene.position.copy(options.position);
     }
@@ -178,8 +178,8 @@ class ModelLoader {
       gltf,
       metadata: {
         name: options.name,
-        path
-      }
+        path,
+      },
     };
   }
 
@@ -200,11 +200,11 @@ class ModelLoader {
         addToScene: options.addToScene ?? null,
         onProgress: options.onProgress ?? null,
         onLoad: options.onLoad ?? null,
-        onError: options.onError ?? null
+        onError: options.onError ?? null,
       };
 
       const processedModel = this.processModel(cachedGltf, path, safeOptions);
-      
+
       if (safeOptions.addToScene) {
         safeOptions.addToScene.add(processedModel.scene);
       }
@@ -217,10 +217,10 @@ class ModelLoader {
       resolve(processedModel);
     });
   }
-  
+
   // Utility methods
   getNameFromPath(path) {
-    return path.split('/').pop().split('.')[0];
+    return path.split("/").pop().split(".")[0];
   }
 
   isLoaded(path) {
@@ -234,7 +234,7 @@ class ModelLoader {
   getLoadingStatus() {
     return {
       loaded: this.cache.size,
-      loading: this.loadingPromises.size
+      loading: this.loadingPromises.size,
     };
   }
 

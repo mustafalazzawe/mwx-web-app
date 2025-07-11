@@ -1,7 +1,10 @@
-import * as THREE from 'three';
+import * as THREE from "three";
+import { getAssetPath } from '../../utils/assetsPaths';
 
 async function loadShader(path) {
-  const response = await fetch(path);
+  const fullPath = getAssetPath(path);
+  console.log("Loading shader from:", fullPath);
+  const response = await fetch(fullPath);
   return response.text();
 }
 
@@ -11,7 +14,7 @@ export default class Sensor extends THREE.Mesh {
 
     this.camera = camera;
     this.position.copy(data.position);
-    this.name = data.name || 'Unnamed Sensor';
+    this.name = data.name || "Unnamed Sensor";
     this.userData = {
       isSensor: true,
       metadata: data,
@@ -22,8 +25,8 @@ export default class Sensor extends THREE.Mesh {
   }
 
   async init() {
-    const vertexShader = await loadShader('/shaders/sensor.vert.glsl');
-    const fragmentShader = await loadShader('/shaders/sensor.frag.glsl');
+    const vertexShader = await loadShader("shaders/sensor.vert.glsl");
+    const fragmentShader = await loadShader("shaders/sensor.frag.glsl");
 
     this.uniforms = {
       uTime: { value: 0 },
