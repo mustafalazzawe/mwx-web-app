@@ -17,6 +17,8 @@ const Dropdown: FC<IDropdownProps> = (props) => {
     placeholder = "Select...",
     direction = "auto",
     showSensorCount = false,
+    variant = "Label",
+    ...rest
   } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -136,7 +138,9 @@ const Dropdown: FC<IDropdownProps> = (props) => {
     <DropdownContainer ref={containerRef}>
       <DropdownTrigger ref={triggerRef}>
         <DropdownButton
+          {...rest} // Forward button props like disabled, className, etc.
           isOpen={isOpen}
+          $variant={variant}
           onClick={toggleDropdown}
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"

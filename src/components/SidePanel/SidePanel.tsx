@@ -31,16 +31,19 @@ const SidePanel: FC<ISidePanelProps> = (props) => {
   const handlePageChange = (page: TTopNavButtons): void => {
     const path = page === "Model" ? "/" : "/dashboard";
     navigate(path);
-    onClose(); // Close panel after navigation
+
+    onClose();
   };
 
   const handleNotificationClick = (): void => {
     console.log("Notification Clicked");
+
     onClose();
   };
 
   const handleUserClick = (): void => {
     console.log("User Clicked");
+
     onClose();
   };
 

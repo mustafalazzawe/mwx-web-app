@@ -73,10 +73,6 @@ export const Hamburger = styled.div`
   grid-area: hamburger;
 
   display: none;
-  justify-content: flex-end;
-  align-items: center;
-
-  height: 100%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
     display: flex;

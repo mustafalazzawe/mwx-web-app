@@ -4,13 +4,6 @@ export const BottomNavWrapper = styled.div<{
   $isMobile: boolean;
   $isExpanded: boolean;
 }>`
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: "left right";
-  column-gap: 32px;
-
-  align-items: center;
-
   width: 100%;
   height: 56px;
   min-height: 56px;
@@ -22,29 +15,101 @@ export const BottomNavWrapper = styled.div<{
   border-top: ${({ theme }) => theme.commonStyles.border.nav};
   ${({ theme }) => theme.effects.surface.default}
 
-  /* Tablet, Mobile screens */
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
 
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 200;
+
+    height: ${({ $isExpanded }) => ($isExpanded ? "50vh" : "56px")};
+    max-height: 80vh;
+    min-height: 56px;
+
+    padding: 24px 0;
 
     border-radius: 16px 16px 0 0;
-
-    /* Expandable height */
-    height: ${({ $isExpanded }) => ($isExpanded ? "60vh" : "80px")};
-    max-height: 80vh;
-
     transition: height 0.3s ease;
-
     overflow: hidden;
-
-    z-index: 100;
   }
 `;
 
-export const BottomSheetHandle = styled.div`
+export const BottomSheetOverlay = styled.div<{ $isVisible: boolean }>`
+  display: none;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
+    display: ${({ $isVisible }) => ($isVisible ? "block" : "none")};
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 150;
+
+    background-color: ${({ theme }) => theme.palettes.alpha[700]};
+    backdrop-filter: blur(4px);
+
+    animation: overlayFadeIn 0.3s ease-out;
+
+    @keyframes overlayFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+`;
+
+export const BottomSheetHandle = styled.div<{ $isExpanded: boolean }>`
+  display: none;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    bottom: ${({ $isExpanded }) => ($isExpanded ? "calc(50vh + 8px)" : "62px")};
+    z-index: 201;
+
+    width: 100%;
+
+    padding: 16px 0;
+
+    cursor: pointer;
+
+    opacity: 0.5;
+
+    transition: all 0.3s ease;
+
+    &:active {
+      opacity: 0.9;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    .handle {
+      width: 100px;
+      height: 4px;
+
+      background-color: ${({ theme }) =>
+        theme.semanticColors.foreground["fg-primary"]};
+      border-radius: 2px;
+    }
+  }
+`;
+
+export const BottomSheetHeader = styled.div`
   display: none;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
@@ -53,23 +118,14 @@ export const BottomSheetHandle = styled.div`
     align-items: center;
 
     width: 100%;
-    height: 24px;
 
-    padding: 8px 0;
+    border-bottom: ${({ theme }) => theme.commonStyles.border.nav};
 
-    cursor: pointer;
+    h2 {
+      ${({ theme }) => theme.typography.subtitle.medium}
+      color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
 
-    &::after {
-      content: "";
-
-      width: 40px;
-      height: 4px;
-
-      background-color: ${({ theme }) =>
-        theme.semanticColors.foreground["fg-primary"]};
-      border-radius: 2px;
-
-      opacity: 0.3;
+      padding-bottom: 16px;
     }
   }
 `;
@@ -82,18 +138,20 @@ export const BottomNavContent = styled.div<{ $isExpanded: boolean }>`
 
   align-items: center;
 
+  width: 100%;
   height: 100%;
 
   padding: 0;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
-    display: flex;
+    display: ${({ $isExpanded }) => ($isExpanded ? "flex" : "none")};
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
 
-    height: calc(100% - 24px);
+    width: 100%;
 
-    overflow-y: auto;
+    padding: 0 24px;
+    overflow-y: hidden;
   }
 `;
 
@@ -108,10 +166,9 @@ export const BottomNavLeft = styled.div`
   height: 100%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    grid-area: none;
 
+    width: 100%;
     height: auto;
   }
 `;
@@ -128,7 +185,9 @@ export const BottomNavRight = styled.div`
   height: 100%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
-    justify-content: stretch;
+    grid-area: none;
+
+    width: 100%;
     height: auto;
   }
 `;
@@ -139,17 +198,20 @@ export const MobileSection = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
+
+    width: 100%;
 
     .section-label {
-      ${({ theme }) => theme.typography.body.secondary.medium};
+      ${({ theme }) => theme.typography.body.primary.regular}
       color: ${({ theme }) => theme.semanticColors.foreground["fg-secondary"]};
     }
 
     .section-content {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      gap: 16px;
+
+      width: 100%;
     }
   }
 `;
@@ -164,6 +226,7 @@ export const MobileModeGrid = styled.div`
   button {
     justify-content: center;
     min-height: 44px;
+    padding: 12px 8px;
   }
 `;
 
@@ -175,9 +238,9 @@ export const CollapsedView = styled.div<{ $isExpanded: boolean }>`
     justify-content: space-between;
     align-items: center;
 
-    height: 56px;
+    width: 100%;
 
-    padding: 16px 20px 8px 20px;
+    padding: 16px 24px;
 
     .collapsed-left {
       flex: 1;
@@ -185,30 +248,29 @@ export const CollapsedView = styled.div<{ $isExpanded: boolean }>`
       display: flex;
       align-items: center;
       gap: 12px;
-    }
 
-    .collapsed-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      min-width: 0;
     }
 
     .current-mode {
-      ${({ theme }) => theme.typography.body.primary.medium};
+      ${({ theme }) => theme.typography.body.secondary.medium}
       color: ${({ theme }) =>
         theme.semanticColors.interactive["interactive-text-active"]};
+      ${({ theme }) => theme.effects.text.active}
     }
 
     .divider {
+      flex-shrink: 0;
+
       width: 1px;
       height: 20px;
+
       background-color: ${({ theme }) => theme.semanticColors.border.primary};
-      opacity: 0.5;
     }
 
     .current-floor {
       ${({ theme }) => theme.typography.body.secondary.medium}
-      color: ${({ theme }) => theme.semanticColors.foreground["fg-secondary"]};
+      color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
     }
   }
 `;

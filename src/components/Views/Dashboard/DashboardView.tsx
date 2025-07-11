@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import type { FC } from "react";
 import {
   DashboardViewWrapper,
   DashboardContent,
-  MetricsGrid,
-  MetricCard,
+  DashboardGrid,
+  TableSection,
 } from "./DashboardView.styled";
 import TopNav from "../../Navbars/TopNav/TopNav";
 import SubNav from "../../Navbars/SubNav/SubNav";
+import Card from "../../Card/Card";
+import SensorStatusChart from "../../Charts/SensorStatusChart";
+import SensorCountChart from "../../Charts/SensorCountChart";
+import SensorTable from "../../Table/src/SensorTable";
 
-interface DashboardData {
+interface IDashboardData {
   sensorCount: number;
   activeAlerts: number;
 }
 
-const DashboardView: React.FC = () => {
-  const [dashboardData, setDashboardData] = useState<DashboardData | null>(
+const DashboardView: FC = () => {
+  const [dashboardData, setDashboardData] = useState<IDashboardData | null>(
     null
   );
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +32,7 @@ const DashboardView: React.FC = () => {
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const mockData: DashboardData = {
+        const mockData: IDashboardData = {
           sensorCount: 24,
           activeAlerts: 3,
         };
@@ -57,17 +62,35 @@ const DashboardView: React.FC = () => {
             <p>Loading Dashboard...</p>
           </div>
         ) : dashboardData ? (
-          <MetricsGrid>
-            <MetricCard>
-              <div className="metric-label">Total Sensors</div>
-              <div className="metric-value">{dashboardData.sensorCount}</div>
-            </MetricCard>
+          <>
+            <DashboardGrid>
+              <Card $variant="Metric" title="Total Sensors">
+                <div className="metric-value">{dashboardData.sensorCount}</div>
+              </Card>
 
-            <MetricCard $hasAlert={dashboardData.activeAlerts > 0}>
-              <div className="metric-label">Active Alerts</div>
-              <div className="metric-value">{dashboardData.activeAlerts}</div>
-            </MetricCard>
-          </MetricsGrid>
+              <Card
+                $variant="Metric"
+                title="Active Alerts"
+                $hasAlert={dashboardData.activeAlerts > 0}
+              >
+                <div className="metric-value">{dashboardData.activeAlerts}</div>
+              </Card>
+
+              <Card $variant="Chart" title="Sensor Count">
+                <SensorCountChart />
+              </Card>
+
+              <Card $variant="Chart" title="Sensor Status">
+                <SensorStatusChart />
+              </Card>
+            </DashboardGrid>
+
+            <TableSection>
+              <Card $variant="Table" title="List">
+                <SensorTable />
+              </Card>
+            </TableSection>
+          </>
         ) : (
           <div className="error-container">
             <h2>Failed to Load Dashboard Data</h2>

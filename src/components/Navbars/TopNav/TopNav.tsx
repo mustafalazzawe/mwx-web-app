@@ -99,7 +99,6 @@ const TopNav: FC = () => {
 
         <Hamburger>
           <Button
-            style={{ padding: "16px 0 16px 16px" }}
             $variant="Icon"
             onClick={handleHamburgerClick}
           >
