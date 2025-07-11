@@ -4,17 +4,54 @@ import { useTheme } from "styled-components";
 
 import { useEchartsBase } from "../../hooks/useEchartsBase";
 
-import { sensors } from "../../App.constants";
+import type { ISensorData } from "../../App.types";
 
 interface IStatusCount {
   [key: string]: number;
 }
 
-const SensorStatusChart: FC = () => {
+interface ISensorStatusChartProps {
+  sensors: ISensorData[];
+}
+
+const SensorStatusChart: FC<ISensorStatusChartProps> = ({ sensors }) => {
   const theme = useTheme();
   const { chartRef, initChart, mode } = useEchartsBase();
 
   useEffect(() => {
+    // Early return if no data
+    if (!sensors || sensors.length === 0) {
+      const emptyOption = {
+        title: {
+          text: "No Data Available",
+          left: "center",
+          top: "middle",
+          textStyle: {
+            color: theme.semanticColors.foreground["fg-secondary"],
+            fontSize: 14,
+            fontFamily: "Sofia Sans, sans-serif",
+          },
+        },
+        graphic: {
+          elements: [
+            {
+              type: "text",
+              left: "center",
+              top: "middle",
+              style: {
+                text: "No sensor data to display",
+                fontSize: 12,
+                fill: theme.semanticColors.foreground["fg-secondary"],
+                fontFamily: "Sofia Sans, sans-serif",
+              },
+            },
+          ],
+        },
+      };
+      initChart(emptyOption);
+      return;
+    }
+
     // Calculate status counts from sensor data
     const statusCounts: IStatusCount = sensors.reduce((acc, sensor) => {
       const status = sensor.status.toUpperCase();
@@ -46,6 +83,24 @@ const SensorStatusChart: FC = () => {
         },
       },
     ].filter((item) => item.value > 0); // Only show categories with data
+
+    // Handle case where all sensors have the same status
+    if (chartData.length === 0) {
+      const noDataOption = {
+        title: {
+          text: "No Status Data",
+          left: "center",
+          top: "middle",
+          textStyle: {
+            color: theme.semanticColors.foreground["fg-secondary"],
+            fontSize: 14,
+            fontFamily: "Sofia Sans, sans-serif",
+          },
+        },
+      };
+      initChart(noDataOption);
+      return;
+    }
 
     const option = {
       tooltip: {
@@ -97,6 +152,7 @@ const SensorStatusChart: FC = () => {
 
     initChart(option);
   }, [
+    sensors,
     initChart,
     mode,
     theme.semanticColors.border.primary,

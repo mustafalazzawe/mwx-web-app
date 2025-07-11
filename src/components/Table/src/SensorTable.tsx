@@ -3,13 +3,17 @@ import React from "react";
 import Table from "../Table";
 import type { ITableColumn } from "../Table.types";
 import type { ISensorData } from "../../../App.types";
+import { useTheme } from "styled-components";
 
-import { sensors } from "../../../App.constants";
-
-// Create a type that ensures ISensorData works with the table
 type SensorDataForTable = ISensorData & Record<PropertyKey, unknown>;
 
-const SensorTable: React.FC = () => {
+interface ISensorTableProps {
+  sensors: ISensorData[];
+}
+
+const SensorTable: React.FC<ISensorTableProps> = ({ sensors }) => {
+  const theme = useTheme();
+
   const columns: ITableColumn<SensorDataForTable>[] = [
     {
       key: "id",
@@ -62,6 +66,21 @@ const SensorTable: React.FC = () => {
       width: "150px",
     },
   ];
+
+  // Handle empty state
+  if (!sensors || sensors.length === 0) {
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          padding: "40px 20px",
+          color: theme.semanticColors.foreground["fg-secondary"],
+        }}
+      >
+        <p>No sensor data available</p>
+      </div>
+    );
+  }
 
   return (
     <Table<SensorDataForTable>

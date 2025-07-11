@@ -1,18 +1,55 @@
 import { useEffect } from "react";
 import type { FC } from "react";
-import { useEchartsBase } from "../../hooks/useEchartsBase";
-import { sensors } from "../../App.constants";
 import { useTheme } from "styled-components";
+
+import { useEchartsBase } from "../../hooks/useEchartsBase";
+import type { ISensorData } from "../../App.types";
 
 interface ITypeCount {
   [key: string]: number;
 }
+interface ISensorCountChartProps {
+  sensors: ISensorData[];
+}
 
-const SensorCountChart: FC = () => {
+const SensorCountChart: FC<ISensorCountChartProps> = ({ sensors }) => {
   const theme = useTheme();
   const { chartRef, initChart, mode } = useEchartsBase();
 
   useEffect(() => {
+    // Early return if no data
+    if (!sensors || sensors.length === 0) {
+      const emptyOption = {
+        title: {
+          text: "No Data Available",
+          left: "center",
+          top: "middle",
+          textStyle: {
+            color: theme.semanticColors.foreground["fg-secondary"],
+            fontSize: 14,
+            fontFamily: "Sofia Sans, sans-serif",
+          },
+        },
+        graphic: {
+          elements: [
+            {
+              type: "text",
+              left: "center",
+              top: "middle",
+              style: {
+                text: "No sensor data to display",
+                fontSize: 12,
+                fill: theme.semanticColors.foreground["fg-secondary"],
+                fontFamily: "Sofia Sans, sans-serif",
+              },
+            },
+          ],
+        },
+      };
+      initChart(emptyOption);
+      return;
+    }
+
     // Calculate type counts from sensor data
     const typeCounts: ITypeCount = sensors.reduce((acc, sensor) => {
       const type = sensor.type;
@@ -89,6 +126,7 @@ const SensorCountChart: FC = () => {
 
     initChart(option);
   }, [
+    sensors,
     initChart,
     mode,
     theme.palettes.greyscale,

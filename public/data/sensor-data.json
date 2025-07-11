@@ -1,0 +1,2991 @@
+{
+  "sensors": [
+    {
+      "id": "B8D61ABC26A8",
+      "status": "Good",
+      "type": "OAQ",
+      "model": "N/A",
+      "building": "Main",
+      "floor": "5",
+      "location": "Roof",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 68,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Ozone",
+          "data": {
+            "value": 42,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 55.2,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "NO2",
+          "data": {
+            "value": 28,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 2.5",
+          "data": {
+            "value": 18,
+            "unit": "μg/m³"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 10",
+          "data": {
+            "value": 35,
+            "unit": "μg/m³"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 89,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B164333",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 325",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 70,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1012,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 55.2,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 45,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 890,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 180,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 92,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B163035",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "F3 HALL #1",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 72,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1010,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 58.7,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 52,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1050,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 195,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 88,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B164163",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 322",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 69,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1009,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 62.1,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 38,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 920,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 165,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 79,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B163891",
+      "status": "Bad",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 318",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 71,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1008,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 60.5,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 39,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1630,
+            "unit": "ppm"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 312,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 84,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current CO2 levels detected exceed 1500 ppm, indicating a significant concern for indoor air quality."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124707D486876",
+      "status": "Bad",
+      "type": "IEQPM",
+      "model": "AM308-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 321",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 72,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 2.5",
+          "data": {
+            "value": 48,
+            "unit": "μg/m³"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 60.5,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 10",
+          "data": {
+            "value": 85,
+            "unit": "μg/m³"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1450,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Light Level",
+          "data": {
+            "value": 25,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 345,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1008,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 84,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "PM 2.5 levels exceed 35 μg/m³, indicating poor air quality that may affect sensitive individuals.",
+        "PM 10 levels exceed 75 μg/m³, air quality is unhealthy for sensitive groups."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B163809",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 317",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 75,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1008,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 60.5,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 39,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1124,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 312,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 84,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "The current TVOC level is within the moderate index category of 204 - 660 ppb. Please be aware that prolonged exposure to these levels may have health implications."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B163759",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 314",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 74,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1011,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 65.2,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 42,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1280,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 285,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 76,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "CO2 levels are elevated at 1280 ppm. Consider improving ventilation."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B163120",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 310",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 76,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1007,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 68.1,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 35,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1350,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 380,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 82,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "Humidity levels are elevated at 68%. Consider improving ventilation to reduce moisture."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B163530",
+      "status": "Bad",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 313",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 78,
+            "unit": "°F"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1005,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 72.8,
+            "unit": "%"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 28,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1580,
+            "unit": "ppm"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 720,
+            "unit": "ppb"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 68,
+            "unit": "%"
+          },
+          "status": "Medium"
+        }
+      ],
+      "alerts": [
+        "Temperature is critically high at 78°F. Immediate cooling action required.",
+        "Humidity levels are dangerously high at 73%. Risk of mold and poor air quality.",
+        "CO2 levels exceed safe thresholds at 1580 ppm. Immediate ventilation required.",
+        "TVOC levels are unhealthy at 720 ppb. Potential health risks from air pollutants."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B162816",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 307",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 74,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1009,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 66.5,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 41,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1220,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 290,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 91,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "Humidity levels are slightly elevated. Monitor for comfort and air quality."
+      ],
+      "timestamp": "06/04/2025 12:38:39 PM"
+    },
+    {
+      "id": "24E124128B226689",
+      "status": "Bad",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 308",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 79,
+            "unit": "°F"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1004,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 75.2,
+            "unit": "%"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 22,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1720,
+            "unit": "ppm"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 850,
+            "unit": "ppb"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 45,
+            "unit": "%"
+          },
+          "status": "Bad"
+        }
+      ],
+      "alerts": [
+        "Critical temperature levels at 79°F. Immediate cooling required.",
+        "Dangerous humidity levels at 75%. High risk of mold and respiratory issues.",
+        "CO2 levels are dangerously high at 1720 ppm. Immediate ventilation required.",
+        "TVOC levels are at hazardous levels. Potential serious health risks.",
+        "Battery critically low at 45%. Sensor may stop functioning soon."
+      ],
+      "timestamp": "05/28/2025 3:17:22 AM"
+    },
+    {
+      "id": "24E124128B162739",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "Library",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 71,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1013,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 52.8,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 65,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 780,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 145,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 95,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/01/2025 9:42:15 PM"
+    },
+    {
+      "id": "24E124128B164392",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "F3 HALL #2",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 75,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1010,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 63.4,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 48,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1180,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 250,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 87,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated."
+      ],
+      "timestamp": "05/31/2025 11:25:48 AM"
+    },
+    {
+      "id": "24E124128B162760",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "4",
+      "location": "RM 303",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 74,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1006,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 64.7,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 36,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1320,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 320,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 73,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "CO2 levels are elevated at 1320 ppm. Consider improving ventilation."
+      ],
+      "timestamp": "06/03/2025 6:08:33 PM"
+    },
+    {
+      "id": "24E124128B161860",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 211",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 75,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1011,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 67.2,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 44,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1290,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 275,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 81,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "Humidity levels are slightly elevated. Monitor for comfort and air quality."
+      ],
+      "timestamp": "05/30/2025 7:51:12 AM"
+    },
+    {
+      "id": "24E124128B162719",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "F2 HALL #1",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 74,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1009,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 65.8,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 56,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1150,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 240,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 89,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated."
+      ],
+      "timestamp": "06/02/2025 4:14:29 PM"
+    },
+    {
+      "id": "24E124128B161978",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 212",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 70,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1012,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 56.3,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 47,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 920,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 175,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 93,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/29/2025 1:37:55 PM"
+    },
+    {
+      "id": "24E124128B226547",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 215",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 76,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1008,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 68.9,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 33,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1340,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 395,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 77,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "Humidity levels are elevated. Consider improving ventilation to reduce moisture."
+      ],
+      "timestamp": "06/04/2025 10:23:07 AM"
+    },
+    {
+      "id": "24E124707D486682",
+      "status": "Bad",
+      "type": "IEQPM",
+      "model": "AM308-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 216",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 73,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 2.5",
+          "data": {
+            "value": 52,
+            "unit": "μg/m³"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 64.8,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 10",
+          "data": {
+            "value": 92,
+            "unit": "μg/m³"
+          },
+          "status": "Bad"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1380,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Light Level",
+          "data": {
+            "value": 31,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 280,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1007,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 78,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "PM 2.5 levels exceed 35 μg/m³, indicating poor air quality that may affect sensitive individuals.",
+        "PM 10 levels exceed 75 μg/m³, air quality is unhealthy for sensitive groups."
+      ],
+      "timestamp": "05/29/2025 7:42:18 AM"
+    },
+    {
+      "id": "24E124128B228773",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 219",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 74,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1009,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 63.7,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 40,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1250,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 295,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 85,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "CO2 levels are elevated at 1250 ppm. Consider improving ventilation."
+      ],
+      "timestamp": "06/02/2025 2:15:33 PM"
+    },
+    {
+      "id": "24E124128B162386",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 220",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 76,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1006,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 67.4,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 37,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1190,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 260,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 80,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "Humidity levels are slightly elevated. Monitor for comfort and air quality."
+      ],
+      "timestamp": "06/01/2025 4:28:41 PM"
+    },
+    {
+      "id": "24E124128B162457",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 223",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 75,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1010,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 66.1,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 43,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1310,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 315,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 74,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "CO2 levels are elevated at 1310 ppm. Consider improving ventilation.",
+        "Humidity levels are slightly elevated. Monitor for comfort and air quality."
+      ],
+      "timestamp": "05/31/2025 8:56:14 AM"
+    },
+    {
+      "id": "24E124128B162473",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "3",
+      "location": "RM 224",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 74,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1012,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 69.3,
+            "unit": "%"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 39,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1260,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 340,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 71,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "CO2 levels are elevated at 1260 ppm. Consider improving ventilation.",
+        "Humidity levels are elevated. Consider improving ventilation to reduce moisture."
+      ],
+      "timestamp": "06/03/2025 11:12:07 AM"
+    },
+    {
+      "id": "24E124128B160802",
+      "status": "Medium",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 124",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 75,
+            "unit": "°F"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1008,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 64.9,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 46,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1350,
+            "unit": "ppm"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 275,
+            "unit": "ppb"
+          },
+          "status": "Medium"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 86,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [
+        "The current temperature exceeds 73 °F. Please take necessary precautions to stay cool and hydrated.",
+        "CO2 levels are elevated at 1350 ppm. Consider improving ventilation."
+      ],
+      "timestamp": "05/27/2025 6:34:52 PM"
+    },
+    {
+      "id": "24E124128B160900",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 125",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 71,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1013,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 54.6,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 58,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 850,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 160,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 92,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 3:47:26 PM"
+    },
+    {
+      "id": "24E124707D488310",
+      "status": "Good",
+      "type": "IEQPM",
+      "model": "AM308-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 119",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 70,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 2.5",
+          "data": {
+            "value": 22,
+            "unit": "μg/m³"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 56.8,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "PM 10",
+          "data": {
+            "value": 42,
+            "unit": "μg/m³"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 920,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Light Level",
+          "data": {
+            "value": 51,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 155,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1011,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 88,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/28/2025 1:09:43 PM"
+    },
+    {
+      "id": "24E124128B160772",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 118",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 72,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1014,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 53.2,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 49,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 790,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 140,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 94,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/01/2025 12:53:19 PM"
+    },
+    {
+      "id": "24E124128B160765",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 114",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 69,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1012,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 51.7,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 55,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 820,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 135,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 90,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/30/2025 9:21:35 AM"
+    },
+    {
+      "id": "24E124128B161256",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "F1 HALL #1",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 73,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1010,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 59.4,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 62,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1080,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 185,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 87,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/02/2025 8:15:42 AM"
+    },
+    {
+      "id": "24E124128B160705",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 110",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 71,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1013,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 52.8,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 44,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 760,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 125,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 96,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/29/2025 4:38:16 PM"
+    },
+    {
+      "id": "24E124128B161521",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "GYM #1",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 70,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1011,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 48.5,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 78,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 940,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 190,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 83,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 7:22:08 AM"
+    },
+    {
+      "id": "24E124128B161680",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "GYM #2",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 72,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1009,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 46.9,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 82,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 870,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 170,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 91,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/31/2025 2:44:51 PM"
+    },
+    {
+      "id": "24E124128B161462",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "F1 HALL #2",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 73,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1012,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 57.3,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 59,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 1140,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 200,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 79,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/28/2025 5:17:33 AM"
+    },
+    {
+      "id": "24E124128B226112",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "2",
+      "location": "RM 151",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 69,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1014,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 50.4,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 53,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 810,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 148,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 93,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/03/2025 9:05:27 PM"
+    },
+    {
+      "id": "24E124128B160555",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "1",
+      "location": "C33",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 71,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1013,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 54.1,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 47,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 820,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": true,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 152,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 88,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/01/2025 6:31:14 AM"
+    },
+    {
+      "id": "24E124128B160583",
+      "status": "Good",
+      "type": "IEQ",
+      "model": "AM107-915",
+      "building": "Main",
+      "floor": "1",
+      "location": "C35",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 70,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Pressure",
+          "data": {
+            "value": 1012,
+            "unit": "hpa"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 52.6,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Illumination",
+          "data": {
+            "value": 50,
+            "unit": "lux"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "CO2",
+          "data": {
+            "value": 780,
+            "unit": "ppm"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Motion Detection",
+          "data": {
+            "value": false,
+            "unit": ""
+          },
+          "status": "Good"
+        },
+        {
+          "title": "TVOC",
+          "data": {
+            "value": 138,
+            "unit": "ppb"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 95,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "05/27/2025 11:49:03 AM"
+    },
+    {
+      "id": "647FDA000001BB4B",
+      "status": "Good",
+      "type": "TUNDRA",
+      "model": "N/A",
+      "building": "Main",
+      "floor": "1",
+      "location": "FREEZER",
+      "details": [
+        {
+          "title": "Temperature",
+          "data": {
+            "value": 72,
+            "unit": "°F"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Battery",
+          "data": {
+            "value": 84,
+            "unit": "%"
+          },
+          "status": "Good"
+        },
+        {
+          "title": "Humidity",
+          "data": {
+            "value": 60.5,
+            "unit": "%"
+          },
+          "status": "Good"
+        }
+      ],
+      "alerts": [],
+      "timestamp": "06/04/2025 1:23:47 PM"
+    }
+  ]
+}
