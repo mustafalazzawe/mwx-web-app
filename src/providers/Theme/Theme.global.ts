@@ -7,6 +7,8 @@ const GlobalStyles = createGlobalStyle`
 
   * {
     margin: 0;
+
+    ${({ theme }) => theme.scrollbar.default(theme)}
   }
 
   body,

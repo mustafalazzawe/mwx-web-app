@@ -113,6 +113,13 @@ export interface IThemeCommonStyles {
   };
 }
 
+export interface IThemeScrollbar {
+  default: (theme: TTheme) => CSSProp;
+  thin: (theme: TTheme) => CSSProp;
+  dark: (theme: TTheme) => CSSProp;
+  hidden: CSSProp;
+}
+
 export interface IThemeComponents {
   buttons: typeof ButtonStyles;
   cards: typeof CardStyles;
@@ -126,6 +133,7 @@ export interface IThemeProps {
   breakpoints: IThemeBreakpoints;
   effects: IThemeEffects;
   commonStyles: IThemeCommonStyles;
+  scrollbar: IThemeScrollbar;
   components: IThemeComponents;
 }
 export interface IThemeState {

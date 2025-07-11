@@ -6,12 +6,19 @@ import type {
   IThemeEffects,
   IThemeFonts,
   IThemeProps,
+  IThemeScrollbar,
   IThemeSemanticColors,
   IThemeTypography,
 } from "./Theme.types";
 import { ButtonStyles } from "../../components/Button/Button.variants";
 import { DropdownStyles } from "../../components/Dropdown/Dropdown.variants";
 import { CardStyles } from "../../components/Card/Card.variants";
+import {
+  darkScrollbarStyles,
+  defaultScrollbarStyles,
+  hiddenScrollbarStyles,
+  thinScrollbarStyles,
+} from "./Theme.scrollbar";
 
 const semanticColors: IThemeSemanticColors = {
   foreground: {
@@ -231,6 +238,13 @@ const commonStyles: IThemeCommonStyles = {
   },
 };
 
+const scrollbar: IThemeScrollbar = {
+  default: (theme) => defaultScrollbarStyles(theme),
+  thin: (theme) => thinScrollbarStyles(theme),
+  dark: (theme) => darkScrollbarStyles(theme),
+  hidden: hiddenScrollbarStyles,
+};
+
 export const themeVars: IThemeProps = {
   palettes,
   semanticColors,
@@ -238,6 +252,7 @@ export const themeVars: IThemeProps = {
   breakpoints,
   effects,
   commonStyles,
+  scrollbar,
   components: {
     buttons: ButtonStyles,
     cards: CardStyles,

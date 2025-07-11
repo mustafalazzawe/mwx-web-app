@@ -23,6 +23,7 @@ export const DropdownList = styled.ul<{
 
   left: 0;
   right: 0;
+  z-index: 1001;
 
   min-width: ${({ width }) => width}px;
   max-height: ${({ maxHeight = 200 }) => maxHeight}px;
@@ -40,30 +41,7 @@ export const DropdownList = styled.ul<{
 
   overflow-y: auto;
   scrollbar-gutter: auto;
-
-  z-index: 1001;
-
-  &::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 16px 16px
-      ${({ theme }) => theme.semanticColors.surface[50]};
-    border: solid 3px transparent;
-
-    border-radius: 100px;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 16px 16px
-      ${({ theme }) => theme.semanticColors.surface[100]};
-    border: solid 3px transparent;
-
-    border-radius: 100px;
-  }
+  ${({ theme }) => theme.scrollbar.default(theme)}
 
   animation: dropdownSlide 0.15s ease-out;
   @keyframes dropdownSlide {

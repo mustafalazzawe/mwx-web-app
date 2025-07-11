@@ -17,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
         breakpoints={themeVars.breakpoints}
         effects={themeVars.effects}
         commonStyles={themeVars.commonStyles}
+        scrollbar={themeVars.scrollbar}
         components={themeVars.components}
       >
         <ThreeProvider>

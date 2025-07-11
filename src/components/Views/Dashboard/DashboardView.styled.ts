@@ -19,9 +19,11 @@ export const DashboardContent = styled.div`
 
   padding: 32px;
 
-  overflow-y: auto;
   width: 100%;
   max-width: 100%;
+
+  overflow-y: auto;
+  ${({ theme }) => theme.scrollbar.default(theme)}
 
   h1 {
     ${({ theme }) => theme.typography.title.medium}
@@ -52,21 +54,10 @@ export const DashboardContent = styled.div`
       color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
     }
 
-    button {
-      padding: 12px 24px;
-      border: ${({ theme }) => theme.commonStyles.border.main};
-      border-radius: 4px;
-      background-color: ${({ theme }) =>
-        theme.semanticColors.background["bg-primary"]};
-      color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
-      ${({ theme }) => theme.typography.body.secondary.medium}
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background-color: ${({ theme }) => theme.semanticColors.accent};
-        border-color: ${({ theme }) => theme.semanticColors.accent};
-      }
+    p {
+      ${({ theme }) => theme.typography.body.secondary.regular}
+      color: ${({ theme }) => theme.semanticColors.foreground["fg-secondary"]};
+      margin-bottom: 8px;
     }
   }
 
