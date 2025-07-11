@@ -38,4 +38,9 @@ export const palettes = {
     caution: "#F89D2A" as const,
     good: "#48A360" as const,
   },
+  alpha: {
+    "700": "rgba(0, 0, 0, 0.48)" as const,
+    "800": "rgba(0, 0, 0, 0.64)" as const,
+    "900": "rgba(0, 0, 0, 0.80)" as const,
+  },
 };

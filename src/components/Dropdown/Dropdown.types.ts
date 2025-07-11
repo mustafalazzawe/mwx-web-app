@@ -1,8 +1,22 @@
+import type { CSSProp } from "styled-components";
+import type { TTheme } from "../../providers/Theme/Theme.types";
+
 export interface IFloorOption {
   id: string;
   label: string;
   sensorCount?: number;
   isDefault?: boolean;
+}
+
+export type TDropdownVariants = "Label" | "Primary";
+
+export interface IDropdownVariantProps {
+  theme: TTheme;
+}
+
+export interface IDropdownStyles {
+  Label: ((props: IDropdownVariantProps) => CSSProp) | CSSProp;
+  Primary: ((props: IDropdownVariantProps) => CSSProp) | CSSProp;
 }
 
 export interface IDropdownProps {
@@ -12,6 +26,11 @@ export interface IDropdownProps {
   placeholder?: string;
   direction?: "up" | "down" | "auto";
   showSensorCount?: boolean;
+  variant?: TDropdownVariants;
+
+  disabled?: boolean;
+  className?: string;
+  id?: string;
 }
 
 // Type guards

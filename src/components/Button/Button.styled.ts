@@ -7,16 +7,14 @@ export const ButtonWrapper = styled.button<{
   $isToggled?: boolean;
 }>`
   display: flex;
-
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 8px 16px;
+  border-radius: 8px;
 
   color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
-
   ${({ theme }) => theme.typography.body.secondary.medium}
 
   cursor: pointer;

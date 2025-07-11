@@ -10,6 +10,8 @@ import type {
   IThemeTypography,
 } from "./Theme.types";
 import { ButtonStyles } from "../../components/Button/Button.variants";
+import { DropdownStyles } from "../../components/Dropdown/Dropdown.variants";
+import { CardStyles } from "../../components/Card/Card.variants";
 
 const semanticColors: IThemeSemanticColors = {
   foreground: {
@@ -35,7 +37,7 @@ const semanticColors: IThemeSemanticColors = {
     "interactive-button-active": palettes.accent[200],
   },
   border: {
-    primary: palettes.greyscale[500],
+    primary: palettes.greyscale[700],
     secondary: palettes.surface[50],
   },
   severity: {
@@ -183,25 +185,21 @@ const effects: IThemeEffects = {
   },
   text: {
     active: css`
-      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
-        0px 0px 8px 0px ${semanticColors.accent};
-      backdrop-filter: blur(50px);
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12),
+        0px 0px 8px ${({ theme }) => theme.semanticColors.accent};
     `,
     severity: {
       bad: css`
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
+        text-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
           0px 0px 8px 0px ${semanticColors.severity.bad};
-        backdrop-filter: blur(50px);
       `,
       caution: css`
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
+        text-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
           0px 0px 8px 0px ${semanticColors.severity.caution};
-        backdrop-filter: blur(50px);
       `,
       good: css`
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
+        text-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12),
           0px 0px 8px 0px ${semanticColors.severity.good};
-        backdrop-filter: blur(50px);
       `,
     },
   },
@@ -240,5 +238,9 @@ export const themeVars: IThemeProps = {
   breakpoints,
   effects,
   commonStyles,
-  components: { buttons: ButtonStyles },
+  components: {
+    buttons: ButtonStyles,
+    cards: CardStyles,
+    dropdowns: DropdownStyles,
+  },
 };

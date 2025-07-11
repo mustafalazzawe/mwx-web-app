@@ -2,6 +2,8 @@ import type { CSSProp } from "styled-components";
 import type { palettes } from "./Theme.palettes";
 import type { themeVars } from "./Theme";
 import type { ButtonStyles } from "../../components/Button/Button.variants";
+import type { DropdownStyles } from "../../components/Dropdown/Dropdown.variants";
+import type { CardStyles } from "../../components/Card/Card.variants";
 
 export type TThemePalettes = typeof palettes;
 export type TThemeModes = "light" | "dark";
@@ -113,6 +115,8 @@ export interface IThemeCommonStyles {
 
 export interface IThemeComponents {
   buttons: typeof ButtonStyles;
+  cards: typeof CardStyles;
+  dropdowns: typeof DropdownStyles;
 }
 
 export interface IThemeProps {

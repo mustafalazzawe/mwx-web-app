@@ -1,6 +1,9 @@
 import { css } from "styled-components";
 
-import type { IButtonStyles, IButtonVariantProps } from "./Button.types";
+import type {
+  IButtonStyles,
+  IButtonVariantProps,
+} from "./Button.types";
 
 export const ButtonStyles: IButtonStyles = {
   Label: ({ theme, $isTogglable, $isToggled }: IButtonVariantProps) => css`
@@ -8,14 +11,13 @@ export const ButtonStyles: IButtonStyles = {
     background-color: transparent;
     border: none;
 
-    /* Base styles */
     &:hover {
       color: ${theme.semanticColors.interactive["interactive-text-hover"]};
       transition: color 100ms ease-in;
     }
 
     &:active {
-      color: ${theme.semanticColors.interactive["interactive-text-active"]};
+      color: ${theme.semanticColors.interactive["interactive-text-active"]};    
       transition: color 100ms ease-in;
     }
 
@@ -36,7 +38,7 @@ export const ButtonStyles: IButtonStyles = {
       ${$isToggled &&
       css`
         color: ${theme.semanticColors.interactive["interactive-text-active"]};
-        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 8px ${({theme}) => theme.semanticColors.accent};
+        ${({ theme }) => theme.effects.text.active};
 
         &:hover {
           color: ${theme.semanticColors.interactive["interactive-text-hover"]};
@@ -48,11 +50,120 @@ export const ButtonStyles: IButtonStyles = {
       `}
     `}
   `,
-  Icon: () => css`
-    padding: 0;
+
+  Icon: ({ theme }: IButtonVariantProps) => css`
+    padding: 4px;
 
     background-color: transparent;
-    border-radius: 0;
     border: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px ${theme.semanticColors.accent}33;
+    }
+  `,
+
+  Primary: ({ theme, $isToggled }: IButtonVariantProps) => css`
+    background-color: ${({ theme }) => theme.semanticColors.surface[50]};
+    border: none;
+
+    color: ${$isToggled
+      ? theme.semanticColors.interactive["interactive-text-active"]
+      : theme.semanticColors.interactive["interactive-text"]};
+
+    ${$isToggled ? theme.effects.text.active : "text-shadow: none"};
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: ${theme.semanticColors.surface[100]};
+      color: ${theme.semanticColors.interactive["interactive-text-hover"]};
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px ${theme.semanticColors.accent}33;
+    }
+
+    &:active {
+      background-color: ${theme.semanticColors.surface[200]};
+      color: ${theme.semanticColors.interactive["interactive-text-active"]};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+
+    .nav-icon {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-label {
+      flex: 1;
+    }
+
+    svg,
+    .icon {
+      color: inherit;
+      fill: currentColor;
+    }
+  `,
+
+  Secondary: () => css``,
+
+  Tertiary: ({ theme, $isToggled }: IButtonVariantProps) => css`
+    background-color: transparent;
+    border: none;
+
+    color: ${$isToggled
+      ? theme.semanticColors.interactive["interactive-text-active"]
+      : theme.semanticColors.interactive["interactive-text"]};
+
+    ${$isToggled ? theme.effects.text.active : "text-shadow: none"};
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: ${theme.semanticColors.surface[100]};
+      color: ${theme.semanticColors.interactive["interactive-text-hover"]};
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px ${theme.semanticColors.accent}33;
+    }
+
+    &:active {
+      background-color: ${theme.semanticColors.surface[50]};
+
+      outline: none;
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.semanticColors.accent}33;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+
+    .nav-icon {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-label {
+      flex: 1;
+    }
+
+    svg,
+    .icon {
+      color: inherit;
+      fill: currentColor;
+    }
   `,
 };

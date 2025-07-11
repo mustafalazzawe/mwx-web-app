@@ -1,9 +1,16 @@
-import { useState, type FC } from "react";
+import { Fragment, useEffect, useState, type FC } from "react";
 
 import {
+  BottomNavContent,
   BottomNavLeft,
   BottomNavRight,
   BottomNavWrapper,
+  BottomSheetHandle,
+  BottomSheetHeader,
+  BottomSheetOverlay,
+  CollapsedView,
+  MobileModeGrid,
+  MobileSection,
 } from "./BottomNav.styled";
 import Button from "../../Button/Button";
 import { Label } from "../../Label/Label.styled";
@@ -15,6 +22,9 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
   const { activeMode, onModeChange } = props;
 
   const [selectedFloor, setSelectedFloor] = useState<string>("all");
+
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const modes: Array<{ key: TBottomModes; label: string }> = [
     { key: "Overview", label: "Overview" },
@@ -32,11 +42,30 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     { id: "floor4", label: "Floor 4", sensorCount: 1 },
   ];
 
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = (): void => {
+      const width = window.innerWidth;
+      const isMobileView = width <= 991;
+
+      setIsMobile(isMobileView);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const handleModeToggle = (mode: TBottomModes) => {
     // If clicking the same mode, don't change (keep it active)
     // If clicking a different mode, switch to it
     if (mode !== activeMode) {
       onModeChange(mode);
+
+      if (isMobile) {
+        setIsExpanded(false);
+      }
     }
   };
 
@@ -46,37 +75,129 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     setSelectedFloor(floorIdString);
 
     console.log(`Floor changed to: ${floorIdString}`);
+
+    if (isMobile) {
+      setIsExpanded(false);
+    }
+  };
+
+  const toggleExpanded = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
+  const handleOverlayClick = (): void => {
+    setIsExpanded(false);
+  };
+
+  const getCurrentFloorLabel = (): string => {
+    const currentFloor = floorOptions.find(
+      (floor) => floor.id === selectedFloor
+    );
+    return currentFloor ? currentFloor.label : "Select Floor";
   };
 
   return (
-    <BottomNavWrapper>
-      <BottomNavLeft>
-        <Label>Mode:</Label>
-        {modes.map(({ key, label }) => (
-          <Button
-            key={key}
-            $variant="Label"
-            $isTogglable
-            $isToggled={activeMode === key}
-            $onToggle={() => handleModeToggle(key)}
-          >
-            {label}
-          </Button>
-        ))}
-      </BottomNavLeft>
+    <Fragment>
+      <BottomSheetOverlay
+        $isVisible={isMobile && isExpanded}
+        onClick={handleOverlayClick}
+      />
 
-      <BottomNavRight>
-        <Label>Floor:</Label>
-        <Dropdown
-          options={floorOptions}
-          selectedValue={selectedFloor}
-          onChange={handleFloorChange}
-          direction="up"
-          showSensorCount={false}
-          placeholder="Select Floor"
-        />
-      </BottomNavRight>
-    </BottomNavWrapper>
+      <BottomSheetHandle $isExpanded={isExpanded} onClick={toggleExpanded}>
+        <div className="handle" />
+      </BottomSheetHandle>
+
+      <BottomNavWrapper $isMobile={isMobile} $isExpanded={isExpanded}>
+        {isMobile && isExpanded && (
+          <BottomSheetHeader>
+            <h2>Options</h2>
+          </BottomSheetHeader>
+        )}
+
+        <CollapsedView $isExpanded={isExpanded}>
+          <div className="collapsed-left">
+            <span className="current-mode">{activeMode}</span>
+            <div className="divider" />
+            <span className="current-floor">{getCurrentFloorLabel()}</span>
+          </div>
+        </CollapsedView>
+
+        <BottomNavContent $isExpanded={isExpanded}>
+          <BottomNavLeft>
+            {!isMobile && (
+              <Fragment>
+                <Label>Mode:</Label>
+                {modes.map(({ key, label }) => (
+                  <Button
+                    key={key}
+                    $variant="Label"
+                    $isTogglable
+                    $isToggled={activeMode === key}
+                    $onToggle={() => handleModeToggle(key)}
+                  >
+                    {label}
+                  </Button>
+                ))}
+              </Fragment>
+            )}
+
+            {isMobile && (
+              <MobileSection>
+                <div className="section-label">Mode</div>
+                <MobileModeGrid>
+                  {modes.map(({ key, label }) => (
+                    <Button
+                      key={key}
+                      $variant="Primary"
+                      $isTogglable
+                      $isToggled={activeMode === key}
+                      $onToggle={() => handleModeToggle(key)}
+                    >
+                      {label}
+                    </Button>
+                  ))}
+                </MobileModeGrid>
+              </MobileSection>
+            )}
+          </BottomNavLeft>
+
+          <BottomNavRight>
+            {!isMobile && (
+              <Fragment>
+                <Label>Floor:</Label>
+                <Dropdown
+                  options={floorOptions}
+                  selectedValue={selectedFloor}
+                  onChange={handleFloorChange}
+                  direction="up"
+                  showSensorCount={false}
+                  placeholder="Select Floor"
+                  variant={"Label"}
+                  className="bottom-nav-dropdown"
+                />
+              </Fragment>
+            )}
+
+            {isMobile && (
+              <MobileSection>
+                <div className="section-label">Floor</div>
+                <div className="section-content">
+                  <Dropdown
+                    options={floorOptions}
+                    selectedValue={selectedFloor}
+                    onChange={handleFloorChange}
+                    direction="down"
+                    showSensorCount={false}
+                    placeholder="Select Floor"
+                    variant="Primary"
+                  />
+                </div>
+              </MobileSection>
+            )}
+          </BottomNavRight>
+        </BottomNavContent>
+      </BottomNavWrapper>
+    </Fragment>
   );
 };
 

@@ -20,6 +20,8 @@ export const DashboardContent = styled.div`
   padding: 32px;
 
   overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
 
   h1 {
     ${({ theme }) => theme.typography.title.medium}
@@ -87,45 +89,21 @@ export const DashboardContent = styled.div`
   }
 `;
 
-export const MetricsGrid = styled.div`
+export const DashboardGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-bottom: 16px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
     grid-template-columns: 1fr;
   }
 `;
 
-export const MetricCard = styled.div<{ $hasAlert?: boolean }>`
-  padding: 24px;
-
-  background-color: ${({ theme }) => theme.semanticColors.surface["100"]};
-  border-radius: 8px;
-  ${({ theme }) => theme.effects.surface.default}
-
-  ${({ $hasAlert, theme }) =>
-    $hasAlert &&
-    `
-    border-color: ${theme.semanticColors.severity.caution};
-    ${theme.effects.text.severity.caution}
-  `}
-  
-  .metric-label {
-    ${({ theme }) => theme.typography.body.primary.regular}
-    color: ${({ theme }) => theme.semanticColors.foreground["fg-primary"]};
-    margin-bottom: 16px;
-  }
-
-  .metric-value {
-    ${({ theme }) => theme.typography.title.medium}
-    color: ${({ theme, $hasAlert }) =>
-      $hasAlert
-        ? theme.semanticColors.severity.caution
-        : theme.semanticColors.accent};
-    font-size: 3rem;
-    line-height: 1;
-    font-weight: 600;
-  }
+export const TableSection = styled.div`
+  width: 100%;
+  max-width: 100%;
 `;

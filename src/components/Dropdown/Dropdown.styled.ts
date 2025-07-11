@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import type { TDropdownVariants } from "./Dropdown.types";
 
 export const DropdownContainer = styled.div`
   position: relative;
@@ -18,7 +19,7 @@ export const DropdownList = styled.ul<{
 
   /* Dynamic positioning */
   ${({ direction }) =>
-    direction === "up" ? "bottom: calc(100% + 16px);" : "top: calc(100% + 16px);"}
+    direction === "up" ? "bottom: calc(100% + 8px);" : "top: calc(100% + 8px);"}
 
   left: 0;
   right: 0;
@@ -40,7 +41,7 @@ export const DropdownList = styled.ul<{
   overflow-y: auto;
   scrollbar-gutter: auto;
 
-  z-index: 1000;
+  z-index: 1001;
 
   &::-webkit-scrollbar {
     width: 12px;
@@ -82,9 +83,9 @@ export const DropdownItem = styled.li<{ isSelected?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 
   padding: 12px 16px;
-  cursor: pointer;
 
   color: ${({ theme, isSelected }) =>
     isSelected
@@ -95,6 +96,8 @@ export const DropdownItem = styled.li<{ isSelected?: boolean }>`
     isSelected ? theme.semanticColors.surface[300] : "transparent"};
 
   ${({ theme }) => theme.typography.body.secondary.medium};
+
+  cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) => theme.semanticColors.surface[100]};
@@ -115,20 +118,23 @@ export const DropdownItem = styled.li<{ isSelected?: boolean }>`
   .item-meta {
     ${({ theme }) => theme.typography.body.secondary.regular};
     opacity: 0.7;
-    margin-left: 8px;
   }
 `;
 
-export const DropdownButton = styled.button<{ isOpen: boolean }>`
+export const DropdownButton = styled.button<{
+  isOpen: boolean;
+  $variant: TDropdownVariants;
+}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 
   width: 100%;
   min-width: 120px;
-  padding: 8px 12px;
 
-  background-color: transparent;
+  padding: 8px 16px;
+
   border: none;
   border-radius: 8px;
 
@@ -138,18 +144,15 @@ export const DropdownButton = styled.button<{ isOpen: boolean }>`
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.semanticColors.surface[200]};
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.semanticColors.accent}33;
-  }
-
   .dropdown-icon {
-    margin-left: 8px;
     transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
     transition: transform 0.2s ease;
   }
+
+  ${({ theme, $variant }) => {
+    const variantStyle = theme.components.dropdowns?.[$variant];
+    return typeof variantStyle === "function"
+      ? variantStyle({ theme })
+      : variantStyle || "";
+  }}
 `;
