@@ -17,6 +17,7 @@ const ThemeProvider: FC<PropsWithChildren<IThemeProps>> = ({
     breakpoints,
     effects,
     commonStyles,
+    scrollbar,
     components,
   } = props;
 
@@ -35,6 +36,7 @@ const ThemeProvider: FC<PropsWithChildren<IThemeProps>> = ({
           breakpoints,
           effects,
           commonStyles,
+          scrollbar,
           components,
         }}
       >

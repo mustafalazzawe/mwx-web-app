@@ -62,8 +62,6 @@ export const TopNavRight = styled.div`
   align-items: center;
   gap: 16px;
 
-  height: 100%;
-
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet.max}) {
     display: none;
   }

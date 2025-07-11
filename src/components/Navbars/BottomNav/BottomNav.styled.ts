@@ -27,7 +27,7 @@ export const BottomNavWrapper = styled.div<{
     right: 0;
     z-index: 200;
 
-    height: ${({ $isExpanded }) => ($isExpanded ? "50vh" : "56px")};
+    height: ${({ $isExpanded }) => ($isExpanded ? "60vh" : "56px")};
     max-height: 80vh;
     min-height: 56px;
 
@@ -77,7 +77,7 @@ export const BottomSheetHandle = styled.div<{ $isExpanded: boolean }>`
     align-items: center;
 
     position: fixed;
-    bottom: ${({ $isExpanded }) => ($isExpanded ? "calc(50vh + 8px)" : "62px")};
+    bottom: ${({ $isExpanded }) => ($isExpanded ? "calc(60vh)" : "56px")};
     z-index: 201;
 
     width: 100%;
@@ -86,12 +86,10 @@ export const BottomSheetHandle = styled.div<{ $isExpanded: boolean }>`
 
     cursor: pointer;
 
-    opacity: 0.5;
-
     transition: all 0.3s ease;
 
     &:active {
-      opacity: 0.9;
+      opacity: 0.5;
     }
 
     &:hover {
@@ -105,6 +103,7 @@ export const BottomSheetHandle = styled.div<{ $isExpanded: boolean }>`
       background-color: ${({ theme }) =>
         theme.semanticColors.foreground["fg-primary"]};
       border-radius: 2px;
+      ${({ theme }) => theme.effects.surface.default};
     }
   }
 `;
@@ -223,10 +222,8 @@ export const MobileModeGrid = styled.div`
 
   width: 100%;
 
-  button {
-    justify-content: center;
+  .mobile-interaction { 
     min-height: 44px;
-    padding: 12px 8px;
   }
 `;
 

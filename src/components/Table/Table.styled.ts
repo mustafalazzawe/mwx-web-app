@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const TableWrapper = styled.div`
   width: 100%;
   max-width: 100%;
+
   overflow-x: auto;
+  ${({ theme }) => theme.scrollbar.default(theme)}
 `;
 
 export const StyledTable = styled.table`

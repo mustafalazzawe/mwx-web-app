@@ -13,11 +13,8 @@ import SensorStatusChart from "../../Charts/SensorStatusChart";
 import SensorCountChart from "../../Charts/SensorCountChart";
 import SensorTable from "../../Table/src/SensorTable";
 import { useSensorData } from "../../../hooks/useSensorData";
-
-interface IDashboardData {
-  sensorCount: number;
-  activeAlerts: number;
-}
+import type { IDashboardData } from "./DashboardView.types";
+import Button from "../../Button/Button";
 
 const DashboardView: FC = () => {
   const { sensors, isLoading, error, refetch } = useSensorData();
@@ -74,7 +71,9 @@ const DashboardView: FC = () => {
           <div className="error-container">
             <h2>Failed to Load Dashboard Data</h2>
             <p>{error}</p>
-            <button onClick={refetch}>Retry</button>
+            <Button $variant="Primary" onClick={refetch}>
+              Retry
+            </Button>
           </div>
         </DashboardContent>
       </DashboardViewWrapper>
