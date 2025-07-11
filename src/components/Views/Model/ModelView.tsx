@@ -17,7 +17,7 @@ const ModelView: FC = () => {
   const { isInitialized } = useThreeState();
   const { threeSceneRef } = useThree();
 
-  const [showTutorial, setShowTutorial] = useState(true);
+  const [showTutorial, setShowTutorial] = useState(false);
   const [activeMode, setActiveMode] = useState<TBottomModes>("Overview");
 
   // Check if user has seen controls before
