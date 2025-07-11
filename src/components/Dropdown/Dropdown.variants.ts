@@ -4,28 +4,18 @@ import type { IDropdownVariantProps, IDropdownStyles } from "./Dropdown.types";
 export const DropdownStyles: IDropdownStyles = {
   Label: ({ theme }: IDropdownVariantProps) => css`
     background-color: transparent;
-    border: none;
-    border-radius: 8px;
 
     &:hover {
       background-color: ${theme.semanticColors.surface[200]};
     }
 
     &:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px ${theme.semanticColors.accent}33;
+      background-color: ${theme.semanticColors.surface[100]};
     }
   `,
 
   Primary: ({ theme }: IDropdownVariantProps) => css`
     background-color: ${theme.semanticColors.surface[50]};
-    border: none;
-    border-radius: 8px;
-
-    color: ${theme.semanticColors.interactive["interactive-text"]};
-    ${theme.typography.body.secondary.medium}
-
-    transition: all 0.2s ease;
 
     &:hover {
       background-color: ${theme.semanticColors.surface[100]};
@@ -33,8 +23,7 @@ export const DropdownStyles: IDropdownStyles = {
     }
 
     &:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px ${theme.semanticColors.accent}33;
+      background-color: ${theme.semanticColors.surface[100]};
     }
 
     &:active {

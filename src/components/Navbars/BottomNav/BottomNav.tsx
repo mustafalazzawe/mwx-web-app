@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, type FC } from "react";
+import { Fragment, useEffect, useState, useMemo, type FC } from "react";
 
 import {
   BottomNavContent,
@@ -12,19 +12,24 @@ import {
   MobileModeGrid,
   MobileSection,
 } from "./BottomNav.styled";
-import Button from "../../Button/Button";
-import { Label } from "../../Label/Label.styled";
 import type { IBottomNavProps, TBottomModes } from "./BottomNav.types";
-import Dropdown from "../../Dropdown/Dropdown";
-import type { IFloorOption } from "../../Dropdown/Dropdown.types";
+
+import Button from "../../Button/Button";
+import FloorDropdown from "../../Dropdown/src/FloorDropdown";
+import { Label } from "../../Label/Label.styled";
+import type { IFloorOption } from "../../Dropdown/src/FloorDropdown";
+
+import { useSensorData } from "../../../hooks/useSensorData";
 
 const BottomNav: FC<IBottomNavProps> = (props) => {
   const { activeMode, onModeChange } = props;
 
   const [selectedFloor, setSelectedFloor] = useState<string>("all");
-
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  // Get sensor data
+  const { sensors, isLoading } = useSensorData();
 
   const modes: Array<{ key: TBottomModes; label: string }> = [
     { key: "Overview", label: "Overview" },
@@ -32,34 +37,94 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     { key: "Scenario", label: "Scenario" },
   ];
 
-  // TEMP: Dummy floor / sensor data
-  const floorOptions: IFloorOption[] = [
-    { id: "all", label: "All Floors", sensorCount: 24, isDefault: true },
-    { id: "ground", label: "Ground Floor", sensorCount: 8 },
-    { id: "floor1", label: "Floor 1", sensorCount: 10 },
-    { id: "floor2", label: "Floor 2", sensorCount: 6 },
-    { id: "floor3", label: "Floor 3", sensorCount: 13 },
-    { id: "floor4", label: "Floor 4", sensorCount: 1 },
-  ];
+  // Calculate floor options from sensor data
+  const floorOptions: IFloorOption[] = useMemo(() => {
+    if (!sensors || sensors.length === 0) {
+      // Return default option if no sensor data
+      return [
+        { id: "all", label: "All Floors", sensorCount: 0, isDefault: true },
+      ];
+    }
+
+    // Count sensors by floor
+    const floorCounts = sensors.reduce((acc, sensor) => {
+      const floorKey = String(sensor.floor).toLowerCase();
+      acc[floorKey] = (acc[floorKey] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Create floor options array
+    const floors: IFloorOption[] = [];
+
+    // Add "All Floors" option
+    floors.push({
+      id: "all",
+      label: "All Floors",
+      sensorCount: sensors.length,
+      isDefault: true,
+    });
+
+    // Sort floor keys and create individual floor options
+    const sortedFloorKeys = Object.keys(floorCounts).sort((a, b) => {
+      // Handle numeric vs string floors
+      const aNum = parseInt(a);
+      const bNum = parseInt(b);
+
+      // If both are numbers, sort numerically
+      if (!isNaN(aNum) && !isNaN(bNum)) {
+        return aNum - bNum;
+      }
+
+      // Otherwise sort alphabetically, but put numeric floors first
+      if (!isNaN(aNum) && isNaN(bNum)) return -1;
+      if (isNaN(aNum) && !isNaN(bNum)) return 1;
+
+      return a.localeCompare(b);
+    });
+
+    sortedFloorKeys.forEach((floorKey) => {
+      const count = floorCounts[floorKey];
+
+      // Create readable floor labels
+      let label = "";
+      const floorNum = parseInt(floorKey);
+
+      if (!isNaN(floorNum)) {
+        if (floorNum === 0 || floorKey === "ground") {
+          label = "Ground Floor";
+        } else {
+          label = `Floor ${floorNum}`;
+        }
+      } else {
+        // Handle special cases like "roof", "basement", etc.
+        label = floorKey.charAt(0).toUpperCase() + floorKey.slice(1);
+      }
+
+      floors.push({
+        id: floorKey,
+        label,
+        sensorCount: count,
+        isDefault: false,
+      });
+    });
+
+    return floors;
+  }, [sensors]);
 
   // Check if mobile on mount and resize
   useEffect(() => {
     const checkMobile = (): void => {
       const width = window.innerWidth;
       const isMobileView = width <= 991;
-
       setIsMobile(isMobileView);
     };
 
     checkMobile();
-
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleModeToggle = (mode: TBottomModes) => {
-    // If clicking the same mode, don't change (keep it active)
-    // If clicking a different mode, switch to it
     if (mode !== activeMode) {
       onModeChange(mode);
 
@@ -69,12 +134,11 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     }
   };
 
-  const handleFloorChange = (floorId: string | number) => {
-    // TODO: Implement floor change logic
-    const floorIdString = floorId.toString();
-    setSelectedFloor(floorIdString);
+  const handleFloorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const floorId = event.target.value;
+    setSelectedFloor(floorId);
 
-    console.log(`Floor changed to: ${floorIdString}`);
+    console.log(`Floor changed to: ${floorId}`);
 
     if (isMobile) {
       setIsExpanded(false);
@@ -165,14 +229,15 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
             {!isMobile && (
               <Fragment>
                 <Label>Floor:</Label>
-                <Dropdown
+                <FloorDropdown
                   options={floorOptions}
-                  selectedValue={selectedFloor}
+                  value={selectedFloor}
                   onChange={handleFloorChange}
-                  direction="up"
                   showSensorCount={false}
-                  placeholder="Select Floor"
-                  variant={"Label"}
+                  placeholder={isLoading ? "Loading..." : "Select Floor"}
+                  $variant="Label"
+                  $useCustomList={true}
+                  disabled={isLoading}
                   className="bottom-nav-dropdown"
                 />
               </Fragment>
@@ -182,14 +247,15 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
               <MobileSection>
                 <div className="section-label">Floor</div>
                 <div className="section-content">
-                  <Dropdown
+                  <FloorDropdown
                     options={floorOptions}
-                    selectedValue={selectedFloor}
+                    value={selectedFloor}
                     onChange={handleFloorChange}
-                    direction="down"
                     showSensorCount={false}
-                    placeholder="Select Floor"
-                    variant="Primary"
+                    placeholder={isLoading ? "Loading..." : "Select Floor"}
+                    $variant="Primary"
+                    $useCustomList={true}
+                    disabled={isLoading}
                   />
                 </div>
               </MobileSection>

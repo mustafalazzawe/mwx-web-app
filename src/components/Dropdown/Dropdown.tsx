@@ -1,191 +1,260 @@
-import { useCallback, useEffect, useRef, useState, type FC } from "react";
-import { isFloorOption, type IDropdownProps, type IFloorOption } from "./Dropdown.types";
 import {
+  forwardRef,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  Children,
+  isValidElement,
+  Fragment,
+} from "react";
+import type { PropsWithChildren } from "react";
+import {
+  DropdownWrapper,
+  DropdownSelect,
   DropdownButton,
-  DropdownContainer,
-  DropdownItem,
   DropdownList,
-  DropdownTrigger,
+  DropdownItem,
+  DropdownArrow,
 } from "./Dropdown.styled";
+import type { IDropdownProps, IOptionProps } from "./Dropdown.types";
 import { Icon } from "../Icons/Icon";
 
-const Dropdown: FC<IDropdownProps> = (props) => {
+const Dropdown = forwardRef<
+  HTMLSelectElement,
+  PropsWithChildren<IDropdownProps>
+>((props, ref) => {
   const {
-    options,
-    selectedValue,
+    children,
+    $variant = "Label",
+    $useCustomList = true,
+    className,
+    value,
     onChange,
-    placeholder = "Select...",
-    direction = "auto",
-    showSensorCount = false,
-    variant = "Label",
+    onFocus,
+    onBlur,
+    disabled,
     ...rest
   } = props;
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [dropdownDirection, setDropdownDirection] = useState<"up" | "down">(
-    "down"
-  );
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [triggerWidth, setTriggerWidth] = useState<number>(0);
+  const [direction, setDirection] = useState<"up" | "down">("down");
 
-  // Get display value for selected option
-  const getSelectedDisplay = useCallback((): string => {
-    if (!selectedValue) return placeholder;
-    
-    const selectedOption = options.find(option => 
-      isFloorOption(option) ? option.id === selectedValue : option === selectedValue
-    );
-    
-    if (!selectedOption) return placeholder;
-    
-    if (isFloorOption(selectedOption)) {
-      return showSensorCount && selectedOption.sensorCount !== undefined
-        ? `${selectedOption.label} (${selectedOption.sensorCount})`
-        : selectedOption.label;
-    }
-    
-    return selectedOption.toString();
-  }, [selectedValue, options, placeholder, showSensorCount]);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
- // Calculate dropdown direction
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = (): void => {
+      const width = window.innerWidth;
+      const isMobileView = width <= 991; // Match your tablet breakpoint
+      setIsMobile(isMobileView);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const shouldUseCustomList = $useCustomList && !isMobile;
+
+  // Extract options from children using React.Children utilities
+  const getOptionsFromChildren = useCallback(() => {
+    const options: Array<{ value: string; label: string; disabled?: boolean }> =
+      [];
+
+    Children.forEach(children, (child) => {
+      if (isValidElement<IOptionProps>(child) && child.type === "option") {
+        const {
+          value: optionValue,
+          children: optionLabel,
+          disabled: optionDisabled,
+        } = child.props;
+
+        if (optionValue !== undefined) {
+          options.push({
+            value: String(optionValue),
+            label:
+              typeof optionLabel === "string"
+                ? optionLabel
+                : String(optionValue),
+            disabled: optionDisabled || false,
+          });
+        }
+      }
+    });
+
+    return options;
+  }, [children]);
+
+  const options = getOptionsFromChildren();
+
+  // Calculate dropdown direction
   const calculateDirection = useCallback(() => {
-    if (direction !== 'auto') {
-      setDropdownDirection(direction);
-      return;
-    }
+    if (!buttonRef.current) return;
 
-    if (!triggerRef.current) return;
-
-    const rect = triggerRef.current.getBoundingClientRect();
+    const rect = buttonRef.current.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
-    
-    const isNearBottom = spaceBelow < 100;
-    
-    setDropdownDirection(isNearBottom ? 'up' : 'down');
-  }, [direction]);
+    const isNearBottom = spaceBelow < 200;
 
-  const toggleDropdown = useCallback(() => {
+    setDirection(isNearBottom ? "up" : "down");
+  }, []);
+
+  // Handle custom button click
+  const handleCustomButtonClick = useCallback(() => {
+    if (disabled) return;
+
     if (!isOpen) {
       calculateDirection();
+      if (buttonRef.current) {
+        setTriggerWidth(buttonRef.current.offsetWidth);
+      }
     }
-    setIsOpen((prev) => !prev);
-  }, [isOpen, calculateDirection]);
+    setIsOpen(!isOpen);
+  }, [isOpen, disabled, calculateDirection]);
 
-  const handleSelection = useCallback(
-    (option: string | number | IFloorOption) => {
-      const value = isFloorOption(option) ? option.id : option;
-      onChange(value);
+  // Handle custom option selection
+  const handleCustomOptionSelect = useCallback(
+    (optionValue: string) => {
+      if (disabled) return;
+
+      // Create synthetic event to maintain consistency with native select
+      const syntheticEvent = {
+        target: { value: optionValue },
+        currentTarget: { value: optionValue },
+      } as React.ChangeEvent<HTMLSelectElement>;
+
+      onChange?.(syntheticEvent);
       setIsOpen(false);
     },
-    [onChange]
+    [onChange, disabled]
   );
 
-  // Handle keyboard navigation
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent) => {
-      switch (event.key) {
-        case "Enter":
-        case " ":
-          event.preventDefault();
-          toggleDropdown();
-          break;
-        case "Escape":
-          setIsOpen(false);
-          break;
-        case "ArrowDown":
-          event.preventDefault();
-          if (!isOpen) toggleDropdown();
-          // TODO: Add arrow key navigation through options
-          break;
-        case "ArrowUp":
-          event.preventDefault();
-          if (!isOpen) toggleDropdown();
-          // TODO: Add arrow key navigation through options
-          break;
-      }
-    },
-    [isOpen, toggleDropdown]
-  );
+  // Handle native select events
+  const handleNativeFocus = (event: React.FocusEvent<HTMLSelectElement>) => {
+    setIsOpen(true);
+    onFocus?.(event);
+  };
 
-  // Update trigger width when opened
-  useEffect(() => {
-    if (isOpen && triggerRef.current) {
-      setTriggerWidth(triggerRef.current.offsetWidth);
-    }
-  }, [isOpen]);
+  const handleNativeBlur = (event: React.FocusEvent<HTMLSelectElement>) => {
+    setIsOpen(false);
+    onBlur?.(event);
+  };
 
-  // Handle click outside to close
+  // Click outside to close custom dropdown
   useEffect(() => {
+    if (!shouldUseCustomList || !isOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node) &&
-        isOpen
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [shouldUseCustomList, isOpen]);
+
+  // Get current selection display
+  const getSelectedDisplay = useCallback(() => {
+    const selectedOption = options.find((opt) => opt.value === value);
+    return selectedOption?.label || "Select...";
+  }, [options, value]);
 
   return (
-    <DropdownContainer ref={containerRef}>
-      <DropdownTrigger ref={triggerRef}>
-        <DropdownButton
-          {...rest} // Forward button props like disabled, className, etc.
-          isOpen={isOpen}
-          $variant={variant}
-          onClick={toggleDropdown}
-          onKeyDown={handleKeyDown}
-          aria-haspopup="listbox"
-          aria-expanded={isOpen}
-        >
-          <span>{getSelectedDisplay()}</span>
-          <Icon iconName={"Chevron"} className="dropdown-icon" />
-        </DropdownButton>
-      </DropdownTrigger>
+    <DropdownWrapper
+      ref={wrapperRef}
+      $variant={$variant}
+      $useCustomList={shouldUseCustomList}
+      className={className}
+    >
+      {shouldUseCustomList ? (
+        <Fragment>
+          {/* Hidden native select for form integration */}
+          <DropdownSelect
+            ref={ref}
+            {...rest}
+            $variant={$variant}
+            $useCustomList={true}
+            $isHidden={true}
+            value={value}
+            onChange={onChange}
+            onFocus={handleNativeFocus}
+            onBlur={handleNativeBlur}
+            disabled={disabled}
+            tabIndex={-1} // Remove from tab order
+          >
+            {children}
+          </DropdownSelect>
 
-      {isOpen && (
-        <DropdownList 
-          width={triggerWidth} 
-          direction={dropdownDirection}
-          role="listbox"
-        >
-          {options.map((option, index) => {
-            const isSelected = isFloorOption(option) 
-              ? option.id === selectedValue 
-              : option === selectedValue;
-            
-            const displayValue = isFloorOption(option) ? option.label : option.toString();
-            const sensorCount = isFloorOption(option) ? option.sensorCount : undefined;
-            
-            const optionKey = isFloorOption(option) ? option.id : `${option}-${index}`;
-            
-            return (
-              <DropdownItem
-                key={optionKey}
-                isSelected={isSelected}
-                onClick={() => handleSelection(option)}
-                role="option"
-                aria-selected={isSelected}
-              >
-                <span className="item-main">{displayValue}</span>
-                {showSensorCount && sensorCount !== undefined && (
-                  <span className="item-meta">{sensorCount}</span>
-                )}
-              </DropdownItem>
-            );
-          })}
-        </DropdownList>
+          {/* Custom button */}
+          <DropdownButton
+            ref={buttonRef}
+            $variant={$variant}
+            $isOpen={isOpen}
+            onClick={handleCustomButtonClick}
+            disabled={disabled}
+            type="button"
+          >
+            <span>{getSelectedDisplay()}</span>
+            <Icon iconName="Chevron" className="dropdown-icon" />
+          </DropdownButton>
+
+          {/* Custom dropdown list */}
+          {isOpen && (
+            <DropdownList
+              $width={triggerWidth}
+              $direction={direction}
+              role="listbox"
+            >
+              {options.map((option, index) => (
+                <DropdownItem
+                  key={`${option.value}-${index}`}
+                  $isSelected={option.value === value}
+                  $isDisabled={option.disabled}
+                  onClick={() =>
+                    !option.disabled && handleCustomOptionSelect(option.value)
+                  }
+                  role="option"
+                  aria-selected={option.value === value}
+                >
+                  <span className="item-main">{option.label}</span>
+                </DropdownItem>
+              ))}
+            </DropdownList>
+          )}
+        </Fragment>
+      ) : (
+        <Fragment>
+          {/* Native select for mobile */}
+          <DropdownSelect
+            ref={ref}
+            {...rest}
+            $variant={$variant}
+            $useCustomList={false}
+            value={value}
+            onChange={onChange}
+            onFocus={handleNativeFocus}
+            onBlur={handleNativeBlur}
+            disabled={disabled}
+          >
+            {children}
+          </DropdownSelect>
+
+          <DropdownArrow $isOpen={isOpen} className="dropdown-arrow">
+            <Icon iconName="Chevron" />
+          </DropdownArrow>
+        </Fragment>
       )}
-    </DropdownContainer>
+    </DropdownWrapper>
   );
-};
+});
+
+Dropdown.displayName = "Dropdown";
 
 export default Dropdown;
