@@ -285,7 +285,7 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
         $isExpanded={isExpanded}
         onClick={toggleExpanded}
         style={{
-          opacity: isDragging ? 0.6 : 1,
+          opacity: isDragging ? 0 : 1,
           transform: getRubberBandHandleTransform(),
           transition: isDragging
             ? "opacity 0.2s ease"
