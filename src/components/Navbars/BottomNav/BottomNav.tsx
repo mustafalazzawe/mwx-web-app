@@ -1,4 +1,12 @@
-import { Fragment, useEffect, useState, useMemo, type FC } from "react";
+import {
+  Fragment,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+  type FC,
+} from "react";
 
 import {
   BottomNavContent,
@@ -28,6 +36,13 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
+  // Touch/drag state
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [dragStartY, setDragStartY] = useState<number>(0);
+  const [currentTranslateY, setCurrentTranslateY] = useState<number>(0);
+
+  const bottomNavRef = useRef<HTMLDivElement>(null);
+
   // Get sensor data
   const { sensors, isLoading } = useSensorData();
 
@@ -40,23 +55,19 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
   // Calculate floor options from sensor data
   const floorOptions: IFloorOption[] = useMemo(() => {
     if (!sensors || sensors.length === 0) {
-      // Return default option if no sensor data
       return [
         { id: "all", label: "All Floors", sensorCount: 0, isDefault: true },
       ];
     }
 
-    // Count sensors by floor
     const floorCounts = sensors.reduce((acc, sensor) => {
       const floorKey = String(sensor.floor).toLowerCase();
       acc[floorKey] = (acc[floorKey] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
 
-    // Create floor options array
     const floors: IFloorOption[] = [];
 
-    // Add "All Floors" option
     floors.push({
       id: "all",
       label: "All Floors",
@@ -64,18 +75,14 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
       isDefault: true,
     });
 
-    // Sort floor keys and create individual floor options
     const sortedFloorKeys = Object.keys(floorCounts).sort((a, b) => {
-      // Handle numeric vs string floors
       const aNum = parseInt(a);
       const bNum = parseInt(b);
 
-      // If both are numbers, sort numerically
       if (!isNaN(aNum) && !isNaN(bNum)) {
         return aNum - bNum;
       }
 
-      // Otherwise sort alphabetically, but put numeric floors first
       if (!isNaN(aNum) && isNaN(bNum)) return -1;
       if (isNaN(aNum) && !isNaN(bNum)) return 1;
 
@@ -84,8 +91,6 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
 
     sortedFloorKeys.forEach((floorKey) => {
       const count = floorCounts[floorKey];
-
-      // Create readable floor labels
       let label = "";
       const floorNum = parseInt(floorKey);
 
@@ -96,7 +101,6 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
           label = `Floor ${floorNum}`;
         }
       } else {
-        // Handle special cases like "roof", "basement", etc.
         label = floorKey.charAt(0).toUpperCase() + floorKey.slice(1);
       }
 
@@ -111,7 +115,61 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     return floors;
   }, [sensors]);
 
-  // Check if mobile on mount and resize
+  // Touch event handlers
+  const handleTouchStart = useCallback(
+    (e: TouchEvent) => {
+      if (!isMobile || !bottomNavRef.current) return;
+
+      const touch = e.touches[0];
+      setIsDragging(true);
+      setDragStartY(touch.clientY);
+      setCurrentTranslateY(0);
+    },
+    [isMobile]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      if (!isDragging || !isMobile || !bottomNavRef.current) return;
+
+      const touch = e.touches[0];
+      const deltaY = touch.clientY - dragStartY;
+
+      // Only allow downward movement when expanded, upward when collapsed
+      if (isExpanded && deltaY > 0) {
+        // Dragging down when expanded - allow closing
+        setCurrentTranslateY(Math.min(deltaY, window.innerHeight * 0.6));
+      } else if (!isExpanded && deltaY < 0) {
+        // Dragging up when collapsed - allow opening
+        setCurrentTranslateY(Math.max(deltaY, -window.innerHeight * 0.6));
+      }
+    },
+    [isDragging, isMobile, dragStartY, isExpanded]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging || !isMobile) return;
+
+    setIsDragging(false);
+
+    const threshold = 100; // Minimum distance to trigger state change
+    const shouldToggle = Math.abs(currentTranslateY) > threshold;
+
+    if (shouldToggle) {
+      if (isExpanded && currentTranslateY > 0) {
+        // Dragged down while expanded - close
+        setIsExpanded(false);
+      } else if (!isExpanded && currentTranslateY < 0) {
+        // Dragged up while collapsed - open
+        setIsExpanded(true);
+      }
+    }
+
+    // Reset transform
+    setCurrentTranslateY(0);
+  }, [isDragging, isMobile, currentTranslateY, isExpanded]);
+
+  // Check if mobile and attach event listeners
   useEffect(() => {
     const checkMobile = (): void => {
       const width = window.innerWidth;
@@ -123,6 +181,26 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Attach touch event listeners
+  useEffect(() => {
+    if (!isMobile || !bottomNavRef.current) return;
+
+    const element = bottomNavRef.current;
+
+    // Touch events only - native mobile experience
+    element.addEventListener("touchstart", handleTouchStart, {
+      passive: false,
+    });
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+    document.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      element.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isMobile, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
   const handleModeToggle = (mode: TBottomModes) => {
     if (mode !== activeMode) {
@@ -160,6 +238,46 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     return currentFloor ? currentFloor.label : "Select Floor";
   };
 
+  // Calculate transforms for rubber band effect
+  const getRubberBandHandleTransform = () => {
+    if (!isDragging || !isMobile) return undefined;
+
+    const handleMultiplier = 1.15;
+    const handleMovement = currentTranslateY * handleMultiplier;
+
+    return `translateY(${handleMovement}px)`;
+  };
+
+  const getRubberBandContentTransform = () => {
+    if (!isDragging || !isMobile) return undefined;
+
+    // Content follows with elastic resistance
+    const resistance = 0.4; // Lower = more resistance
+    const contentMovement = currentTranslateY * resistance;
+
+    // Base offset for expanded content
+    const baseOffset = isExpanded ? 0 : window.innerHeight * 0.6;
+    return `translateY(${baseOffset + contentMovement}px)`;
+  };
+
+  const getCollapsedOpacity = () => {
+    if (!isDragging || !isMobile) return 1;
+
+    // Fade out collapsed view with rubber band progress
+    const dragProgress =
+      Math.abs(currentTranslateY) / (window.innerHeight * 0.25);
+    return Math.max(0.2, 1 - dragProgress);
+  };
+
+  const getExpandedOpacity = () => {
+    if (!isDragging || !isMobile) return isExpanded ? 1 : 0;
+
+    // Fade in expanded content with rubber band progress
+    const dragProgress =
+      Math.abs(currentTranslateY) / (window.innerHeight * 0.25);
+    return isExpanded ? 1 : Math.min(1, dragProgress * 1.2);
+  };
+
   return (
     <Fragment>
       <BottomSheetOverlay
@@ -167,18 +285,54 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
         onClick={handleOverlayClick}
       />
 
-      <BottomSheetHandle $isExpanded={isExpanded} onClick={toggleExpanded}>
+      <BottomSheetHandle
+        $isExpanded={isExpanded}
+        onClick={toggleExpanded}
+        style={{
+          opacity: isDragging ? 0 : 1,
+          transform: getRubberBandHandleTransform(),
+          transition: isDragging
+            ? "opacity 0.2s ease"
+            : "all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s ease", // Elastic easing
+        }}
+      >
         <div className="handle" />
       </BottomSheetHandle>
 
-      <BottomNavWrapper $isMobile={isMobile} $isExpanded={isExpanded}>
+      <BottomNavWrapper
+        ref={bottomNavRef}
+        $isMobile={isMobile}
+        $isExpanded={isExpanded}
+        style={{
+          transition: isDragging
+            ? "none"
+            : "height 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)", // Elastic easing
+        }}
+      >
         {isMobile && isExpanded && (
-          <BottomSheetHeader>
+          <BottomSheetHeader
+            style={{
+              opacity: getExpandedOpacity(),
+              transform: getRubberBandContentTransform(),
+              transition: isDragging
+                ? "none"
+                : "opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
+            }}
+          >
             <h2>Options</h2>
           </BottomSheetHeader>
         )}
 
-        <CollapsedView $isExpanded={isExpanded}>
+        <CollapsedView
+          $isExpanded={isExpanded}
+          style={{
+            opacity: getCollapsedOpacity(),
+            transform: "translateY(0px)", // Stays pinned
+            transition: isDragging
+              ? "none"
+              : "opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
+          }}
+        >
           <div className="collapsed-left">
             <span className="current-mode">{activeMode}</span>
             <div className="divider" />
@@ -186,7 +340,16 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
           </div>
         </CollapsedView>
 
-        <BottomNavContent $isExpanded={isExpanded}>
+        <BottomNavContent
+          $isExpanded={isExpanded}
+          style={{
+            opacity: getExpandedOpacity(),
+            transform: getRubberBandContentTransform(),
+            transition: isDragging
+              ? "none"
+              : "opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
+          }}
+        >
           <BottomNavLeft>
             {!isMobile && (
               <Fragment>
