@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import * as echarts from 'echarts';
+import * as echarts from "echarts";
 
 import { createCamera } from "./components/camera";
 import { createScene } from "./components/scene";
@@ -12,6 +12,8 @@ import Loop from "./systems/loop/Loop";
 import Resizer from "./systems/resizer/Resizer";
 import EnhancedControls from "./systems/controls/EnhancedControls";
 import ModelLoader from "./systems/loader/ModelLoader";
+
+import { getAssetPath } from "../utils/assetsPaths";
 
 export class ThreeScene {
   constructor(container) {
@@ -27,7 +29,6 @@ export class ThreeScene {
     this.schoolModel = null;
     this.contextModel = null;
 
-
     this.camera = createCamera();
     this.scene = createScene();
     this.renderer = createRenderer();
@@ -39,11 +40,13 @@ export class ThreeScene {
     this.hoveredSensor = null;
     this.sensorOverlay = this.createOverlay();
 
-
     // Append renderer to the provided container (canvas)
     container.appendChild(this.renderer.domElement);
-    this.renderer.domElement.addEventListener("mousemove", this.handleMouseMove);
-    
+    this.renderer.domElement.addEventListener(
+      "mousemove",
+      this.handleMouseMove
+    );
+
     // Initialize game loop
     this.loop = new Loop(this.camera, this.scene, this.renderer);
 
@@ -52,17 +55,17 @@ export class ThreeScene {
 
     // Set up control callbacks
     this.setupControlCallbacks();
-    
+
     // Add controls to game loop
     this.loop.updateables.push(this.controls.controls);
     this.loop.updateables.push({
       tick: (delta) => {
         for (const sensor of this.sensors) {
-          sensor.update(0.1); 
+          sensor.update(0.1);
         }
-      }
+      },
     });
-    
+
     // Initialize model loader
     this.modelLoader = new ModelLoader(this.renderer);
 
@@ -70,7 +73,12 @@ export class ThreeScene {
     const { ambientLight, directionalLight, cameraHelper } = createLights();
 
     // Add lights to scene
-    this.scene.add(ambientLight, directionalLight, directionalLight.target, cameraHelper);
+    this.scene.add(
+      ambientLight,
+      directionalLight,
+      directionalLight.target,
+      cameraHelper
+    );
 
     // Ensure shadow map is updated after adding components to scene (esp. lights)
     this.renderer.shadowMap.needsUpdate = true;
@@ -162,15 +170,15 @@ export class ThreeScene {
 
   handleMouseMove = (event) => {
     const bounds = this.renderer.domElement.getBoundingClientRect();
-  
+
     this.mouse.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
     this.mouse.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
-  
+
     this.raycaster.setFromCamera(this.mouse, this.camera);
     this.raycaster.layers.set(1);
-  
+
     const sensorMeshes = this.sensors.filter(Boolean);
-  
+
     if (sensorMeshes.length === 0) {
       if (this.hoveredSensor) {
         this.hideSensorOverlay();
@@ -178,9 +186,9 @@ export class ThreeScene {
       }
       return;
     }
-  
+
     const intersects = this.raycaster.intersectObjects(sensorMeshes, false);
-  
+
     if (intersects.length > 0) {
       const intersected = intersects[0].object;
       if (this.hoveredSensor !== intersected) {
@@ -200,9 +208,9 @@ export class ThreeScene {
   initECharts() {
     const pieContainer = document.getElementById("echart-pie");
     const lineContainer = document.getElementById("echart-line");
-  
+
     if (!pieContainer || !lineContainer) return;
-  
+
     const pieChart = echarts.init(pieContainer);
     pieChart.setOption({
       title: {
@@ -226,7 +234,7 @@ export class ThreeScene {
       ],
       backgroundColor: "transparent",
     });
-  
+
     const lineChart = echarts.init(lineContainer);
     lineChart.setOption({
       title: {
@@ -256,8 +264,7 @@ export class ThreeScene {
       backgroundColor: "transparent",
     });
   }
-  
-  
+
   showSensorOverlay(sensor, x, y) {
     if (!this.overlay) {
       this.overlay = document.createElement("div");
@@ -270,30 +277,30 @@ export class ThreeScene {
       this.overlay.style.borderRadius = "8px";
       this.overlay.style.fontSize = "12px";
       this.overlay.style.maxWidth = "300px";
-  
+
       this.overlay.innerHTML = `
         <div style="margin-bottom: 8px;"><strong>${sensor.name}</strong></div>
         <div id="echart-pie" style="width: 250px; height: 150px; margin-bottom: 10px;"></div>
         <div id="echart-line" style="width: 250px; height: 150px;"></div>
       `;
-  
+
       document.body.appendChild(this.overlay);
-  
+
       // Give DOM time to attach before initializing charts
       setTimeout(() => {
         this.initECharts();
       }, 10);
     }
-  
+
     this.overlay.style.left = `${x + 10}px`;
     this.overlay.style.top = `${y + 10}px`;
   }
-  
+
   updateSensorOverlay(x, y) {
     this.sensorOverlay.style.left = `${x + 10}px`;
     this.sensorOverlay.style.top = `${y + 10}px`;
   }
-  
+
   hideSensorOverlay() {
     if (this.overlay) {
       this.overlay.remove();
@@ -320,57 +327,60 @@ export class ThreeScene {
     console.log("ThreeScene: Stoping animations...");
   };
 
-  // Load models
+  // Load models with proper asset paths
   async loadSchoolModel() {
     try {
-      const schoolModel = await this.modelLoader.loadModel(
-        "/models/MWX_School.glb",
-        {
-          name: "MWX_School",
-          addToScene: this.scene,
-          position: new THREE.Vector3(0, 0, 0),
-          enableShadows: true,
-          onProgress: (progress, percentage, path) => {
-            console.log(`Loading ${path}: ${percentage.toFixed(1)}%`);
+      const schoolModelPath = getAssetPath("models/MWX_School.glb");
+      console.log("Loading school model from:", schoolModelPath);
 
-            // Emit progress event for React UI updates
-            this.emitLoadingProgress?.(path, percentage);
-          },
-          onLoad: (modelData, path) => {
-            console.log("Model loaded successfully:", modelData.metadata);
+      const schoolModel = await this.modelLoader.loadModel(schoolModelPath, {
+        name: "MWX_School",
+        addToScene: this.scene,
+        position: new THREE.Vector3(0, 0, 0),
+        enableShadows: true,
+        onProgress: (progress, percentage, path) => {
+          console.log(`Loading ${path}: ${percentage.toFixed(1)}%`);
 
-            // Emit loaded event for React UI updates
-            this.emitModelLoaded?.(modelData);
-          },
-          onError: (error, path) => {
-            console.error("Failed to load model:", path, error);
+          // Emit progress event for React UI updates
+          this.emitLoadingProgress?.(path, percentage);
+        },
+        onLoad: (modelData, path) => {
+          console.log("Model loaded successfully:", modelData.metadata);
 
-            // Emit error event for React UI updates
-            this.emitModelError?.(path, error);
-          },
-        }
-      );
+          // Emit loaded event for React UI updates
+          this.emitModelLoaded?.(modelData);
+        },
+        onError: (error, path) => {
+          console.error("Failed to load model:", path, error);
+
+          // Emit error event for React UI updates
+          this.emitModelError?.(path, error);
+        },
+      });
 
       schoolModel.scene.traverse((child) => {
-        if (child.isMesh && child.name.toLowerCase().includes('sensors')) {
+        if (child.isMesh && child.name.toLowerCase().includes("sensors")) {
           console.log("Found sensor: ", child.name);
           const worldPos = new THREE.Vector3();
           child.getWorldPosition(worldPos);
-      
-          const sensor = new Sensor({
-            name: child.name,
-            position: worldPos,
-          }, this.camera);
-     
+
+          const sensor = new Sensor(
+            {
+              name: child.name,
+              position: worldPos,
+            },
+            this.camera
+          );
+
           this.scene.add(sensor);
 
-          sensor.traverse(obj => obj.layers.set(1));
-          
+          sensor.traverse((obj) => obj.layers.set(1));
+
           this.sensors.push(sensor);
           this.tempSensorsToRemove.push(child);
-          } else {
-            child.layers.disable(1);
-          }
+        } else {
+          child.layers.disable(1);
+        }
       });
 
       for (const mesh of this.tempSensorsToRemove) {
@@ -388,33 +398,33 @@ export class ThreeScene {
 
   async loadContextModel() {
     try {
-      const contextModel = await this.modelLoader.loadModel(
-        "/models/Context.glb",
-        {
-          name: "Context",
-          addToScene: this.scene,
-          position: new THREE.Vector3(0, 0, 0),
-          enableShadows: false,
-          onProgress: (progress, percentage, path) => {
-            console.log(`Loading ${path}: ${percentage.toFixed(1)}%`);
+      const contextModelPath = getAssetPath("models/Context.glb");
+      console.log("Loading context model from:", contextModelPath);
 
-            // Emit progress event for React UI updates
-            this.emitLoadingProgress?.(path, percentage);
-          },
-          onLoad: (modelData, path) => {
-            console.log("Context Model loaded successfully:", modelData.metadata);
+      const contextModel = await this.modelLoader.loadModel(contextModelPath, {
+        name: "Context",
+        addToScene: this.scene,
+        position: new THREE.Vector3(0, 0, 0),
+        enableShadows: false,
+        onProgress: (progress, percentage, path) => {
+          console.log(`Loading ${path}: ${percentage.toFixed(1)}%`);
 
-            // Emit loaded event for React UI updates
-            this.emitModelLoaded?.(modelData);
-          },
-          onError: (error, path) => {
-            console.error("Failed to load context model:", path, error);
+          // Emit progress event for React UI updates
+          this.emitLoadingProgress?.(path, percentage);
+        },
+        onLoad: (modelData, path) => {
+          console.log("Context Model loaded successfully:", modelData.metadata);
 
-            // Emit error event for React UI updates
-            this.emitModelError?.(path, error);
-          },
-        }
-      );
+          // Emit loaded event for React UI updates
+          this.emitModelLoaded?.(modelData);
+        },
+        onError: (error, path) => {
+          console.error("Failed to load context model:", path, error);
+
+          // Emit error event for React UI updates
+          this.emitModelError?.(path, error);
+        },
+      });
 
       console.log("Context model loaded:", contextModel.metadata);
       return contextModel;
@@ -555,7 +565,10 @@ export class ThreeScene {
     if (this.sensorOverlay && this.sensorOverlay.parentNode) {
       this.sensorOverlay.parentNode.removeChild(this.sensorOverlay);
     }
-    this.renderer.domElement.removeEventListener("mousemove", this.handleMouseMove);
+    this.renderer.domElement.removeEventListener(
+      "mousemove",
+      this.handleMouseMove
+    );
 
     console.log("ThreeScene: Three.js scene disposed");
   };

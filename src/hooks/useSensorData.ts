@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { ISensorData } from "../App.types";
+import { getAssetPath } from "../utils/assetsPaths";
 
 interface ISensorDataResponse {
   sensors: ISensorData[];
@@ -17,7 +18,7 @@ export const useSensorData = (): IUseSensorDataReturn => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSensorData = async () => {
+  const fetchSensorData = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
@@ -25,10 +26,16 @@ export const useSensorData = (): IUseSensorDataReturn => {
       // Simulate network delay for realistic loading experience
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      const response = await fetch("/data/sensor-data.json");
+      // Use proper asset path
+      const dataPath = getAssetPath("data/sensor-data.json");
+      console.log("Fetching sensor data from:", dataPath);
+
+      const response = await fetch(dataPath);
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch sensor data: ${response.status}`);
+        throw new Error(
+          `Failed to fetch sensor data: ${response.status} ${response.statusText}`
+        );
       }
 
       const data: ISensorDataResponse = await response.json();
@@ -38,6 +45,7 @@ export const useSensorData = (): IUseSensorDataReturn => {
         throw new Error("Invalid sensor data format");
       }
 
+      console.log(`Loaded ${data.sensors.length} sensors from ${dataPath}`);
       setSensors(data.sensors);
     } catch (err) {
       const errorMessage =
@@ -47,20 +55,16 @@ export const useSensorData = (): IUseSensorDataReturn => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const refetch = () => {
-    fetchSensorData();
-  };
+  }, []);
 
   useEffect(() => {
     fetchSensorData();
-  }, []);
+  }, [fetchSensorData]);
 
   return {
     sensors,
     isLoading,
     error,
-    refetch,
+    refetch: fetchSensorData, // Use the memoized version
   };
 };
