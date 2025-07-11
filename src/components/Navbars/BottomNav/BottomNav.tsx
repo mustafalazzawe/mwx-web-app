@@ -238,11 +238,11 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
     return currentFloor ? currentFloor.label : "Select Floor";
   };
 
-  // Calculate transforms for rubber band effect
+  // Calculate transforms for rubber band effect (mobile only)
   const getRubberBandHandleTransform = () => {
     if (!isDragging || !isMobile) return undefined;
 
-    const handleMultiplier = 1.15;
+    const handleMultiplier = 1.5;
     const handleMovement = currentTranslateY * handleMultiplier;
 
     return `translateY(${handleMovement}px)`;
@@ -251,11 +251,9 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
   const getRubberBandContentTransform = () => {
     if (!isDragging || !isMobile) return undefined;
 
-    // Content follows with elastic resistance
-    const resistance = 0.4; // Lower = more resistance
+    const resistance = 0.6;
     const contentMovement = currentTranslateY * resistance;
 
-    // Base offset for expanded content
     const baseOffset = isExpanded ? 0 : window.innerHeight * 0.6;
     return `translateY(${baseOffset + contentMovement}px)`;
   };
@@ -263,7 +261,6 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
   const getCollapsedOpacity = () => {
     if (!isDragging || !isMobile) return 1;
 
-    // Fade out collapsed view with rubber band progress
     const dragProgress =
       Math.abs(currentTranslateY) / (window.innerHeight * 0.25);
     return Math.max(0.2, 1 - dragProgress);
@@ -272,7 +269,6 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
   const getExpandedOpacity = () => {
     if (!isDragging || !isMobile) return isExpanded ? 1 : 0;
 
-    // Fade in expanded content with rubber band progress
     const dragProgress =
       Math.abs(currentTranslateY) / (window.innerHeight * 0.25);
     return isExpanded ? 1 : Math.min(1, dragProgress * 1.2);
@@ -289,11 +285,11 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
         $isExpanded={isExpanded}
         onClick={toggleExpanded}
         style={{
-          opacity: isDragging ? 0 : 1,
+          opacity: isDragging ? 0.6 : 1,
           transform: getRubberBandHandleTransform(),
           transition: isDragging
             ? "opacity 0.2s ease"
-            : "all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s ease", // Elastic easing
+            : "all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s ease",
         }}
       >
         <div className="handle" />
@@ -306,14 +302,16 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
         style={{
           transition: isDragging
             ? "none"
-            : "height 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)", // Elastic easing
+            : "height 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
         }}
       >
         {isMobile && isExpanded && (
           <BottomSheetHeader
             style={{
-              opacity: getExpandedOpacity(),
-              transform: getRubberBandContentTransform(),
+              ...(isMobile && {
+                opacity: getExpandedOpacity(),
+                transform: getRubberBandContentTransform(),
+              }),
               transition: isDragging
                 ? "none"
                 : "opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
@@ -326,8 +324,10 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
         <CollapsedView
           $isExpanded={isExpanded}
           style={{
-            opacity: getCollapsedOpacity(),
-            transform: "translateY(0px)", // Stays pinned
+            ...(isMobile && {
+              opacity: getCollapsedOpacity(),
+            }),
+            transform: "translateY(0px)",
             transition: isDragging
               ? "none"
               : "opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
@@ -343,8 +343,10 @@ const BottomNav: FC<IBottomNavProps> = (props) => {
         <BottomNavContent
           $isExpanded={isExpanded}
           style={{
-            opacity: getExpandedOpacity(),
-            transform: getRubberBandContentTransform(),
+            ...(isMobile && {
+              opacity: getExpandedOpacity(),
+              transform: getRubberBandContentTransform(),
+            }),
             transition: isDragging
               ? "none"
               : "opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)",
