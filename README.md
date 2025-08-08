@@ -1,54 +1,88 @@
-# React + TypeScript + Vite
+# MWX Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based sensor monitoring application combining interactive 3D building models with comprehensive data dashboards for indoor environmental quality (IEQ) monitoring.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dashboard View**: Real-time sensor metrics, interactive charts, and detailed sensor tables
+- **3D Model View**: Interactive building navigation with sensor visualization
+- **Multiple Modes**: Overview, Sensors, and Scenario interaction modes
+- **Responsive Design**: Mobile-friendly with comprehensive theming
+- **Type Safety**: Full TypeScript implementation
 
-## Expanding the ESLint configuration
+## 🚀 Quick Start
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
+- **Bun** (recommended) or Node.js 18+
+- Modern web browser with WebGL support
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd mwx-web-app
+
+# Install dependencies
+bun install
+
+# Start development server
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Production Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Build for production
+bun run build
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+# Preview production build locally
+bun run preview
 ```
+
+## 🎯 Usage
+
+- **Model View** (`/`): Interactive 3D building with mouse controls and camera presets
+- **Dashboard** (`/dashboard`): Sensor metrics, charts, and detailed data tables
+
+## 🛠️ Technology Stack
+
+- **React 19 + TypeScript** - UI framework with type safety
+- **Three.js** - 3D graphics and model rendering  
+- **Styled Components** - CSS-in-JS styling
+- **ECharts** - Data visualization
+- **Vite** - Build tool and dev server
+
+## 🔧 Development
+
+### Available Scripts
+- `bun run dev` - Start development server
+- `bun run build` - Build for production  
+- `bun run preview` - Preview production build
+- `bun run lint` - Run ESLint
+
+### Customization
+- **Theme**: Modify `src/providers/Theme/Theme.ts`
+- **Sensor Data**: Update `public/data/sensor-data.json`
+- **3D Models**: Replace GLB files and update loader configuration
+
+## 📱 Deployment
+
+**GitHub Pages**: Automated deployment on push to `main` branch via GitHub Actions.
+
+**Manual**: Build with `bun run build` and deploy the `dist/` folder.
+
+## 📄 License
+
+This project is private and proprietary. All rights reserved.
+
+## 🆘 Support
+
+For support and questions:
+- Check existing issues in the repository
+- Review the documentation and code comments
+- Contact the development team
+
+---
+
+**Built with ❤️ using React, Three.js, and modern web technologies**
